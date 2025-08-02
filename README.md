@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Flickart - MERN eCommerce Project (Flipkart Clone)
 
 This is a Flipkart clone eCommerce project developed using the MERN (MongoDB, Express.js, React.js, Node.js) stack. It's designed to demonstrate the functionality and features of a modern eCommerce website.
@@ -110,3 +111,6 @@ VITE_SERVER_URL=SERVER_BASE_URL_WITHOUT_TRAILING_SLASH (in case you want deploye
 ## Contributing
 
 Contributions are welcome! Feel free to open issues or submit pull requests to improve this project.
+=======
+# FurryPaws
+>>>>>>> 884ef1f480363167762754db99749b1675509da5
