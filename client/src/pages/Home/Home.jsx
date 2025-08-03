@@ -24,9 +24,7 @@ const Home = () => {
             <ScrollToTopOnRouteChange />
             <Categories />
             <main className="flex flex-col items-center gap-3 px-2 pb-5 sm:mt-2">
-                {/* <pre className="min-h-[60vh]">
-                    {JSON.stringify(auth, null, 3)}
-                </pre> */}
+                
                 <Banner />
                 <DealSlider title={"Discounts for You"} />
                 <ProductSlider

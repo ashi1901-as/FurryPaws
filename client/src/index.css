@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* index.css or App.css */
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 
 @layer base {
     section {

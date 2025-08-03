@@ -1,76 +1,83 @@
 /* eslint-disable react/prop-types */
+import { useEffect, useRef } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Banner.css";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import oppo from "../../../assets/images/Banners/oppo-reno7.webp";
-import samsung from "../../../assets/images/Banners/samsung.jpeg";
-import infinix from "../../../assets/images/Banners/infinix.jpeg";
-import flight from "../../../assets/images/Banners/flight.jpeg";
-import flight2 from "../../../assets/images/Banners/flight2.jpeg";
-import laptop from "../../../assets/images/Banners/laptop.png";
-import mattress from "../../../assets/images/Banners/mattress.jpg";
-import iphone from "../../../assets/images/Banners/iphone.jpg";
 
-export const PreviousBtn = ({ className, onClick }) => {
-    return (
-        <div className={className} onClick={onClick}>
-            <ArrowBackIosIcon />
-        </div>
-    );
-};
+const heroImage =
+  "https://images.unsplash.com/photo-1581888227599-779811939961?ixlib=rb-4.0.3&auto=format&fit=crop&w=1674&q=80";
 
-export const NextBtn = ({ className, onClick }) => {
-    return (
-        <div className={className} onClick={onClick}>
-            <ArrowForwardIosIcon />
-        </div>
-    );
-};
+export const PreviousBtn = ({ className, onClick }) => (
+  <div className={className} onClick={onClick}>
+    <ArrowBackIosIcon />
+  </div>
+);
+
+export const NextBtn = ({ className, onClick }) => (
+  <div className={className} onClick={onClick}>
+    <ArrowForwardIosIcon />
+  </div>
+);
 
 const Banner = () => {
-    const settings = {
-        autoplay: true,
-        autoplaySpeed: 3000,
-        dots: false,
-        infinite: true,
-        speed: 1500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        prevArrow: <PreviousBtn />,
-        nextArrow: <NextBtn />,
+  const sliderRef = useRef(null);
+
+  const settings = {
+    autoplay: true,
+    autoplaySpeed: 5000,
+    dots: false,
+    infinite: true,
+    speed: 1500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    prevArrow: <PreviousBtn />,
+    nextArrow: <NextBtn />,
+    adaptiveHeight: true, // Makes it adjust height on resize
+  };
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (sliderRef.current) {
+        sliderRef.current.slickPause();
+        sliderRef.current.slickPlay();
+      }
     };
 
-    const banners = [
-        iphone,
-        laptop,
-        flight,
-        samsung,
-        infinix,
-        mattress,
-        oppo,
-        flight2,
-    ];
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-    return (
-        <>
-            <section className="w-full rounded-sm shadow p-0 overflow-hidden mt-3 sm:m-2">
-                <Slider {...settings}>
-                    {banners.map((el, i) => (
-                        <img
-                            draggable="false"
-                            className="h-[150px] sm:h-[280px] w-full object-cover "
-                            src={el}
-                            alt="banner"
-                            key={i}
-                        />
-                    ))}
-                </Slider>
-            </section>
-        </>
-    );
+  return (
+    <section className="banner-section">
+      <Slider ref={sliderRef} {...settings}>
+        <div className="hero-slide">
+          <div className="hero-container">
+            <div className="hero-content">
+              <h2>Wellness, One Woof at a Time</h2>
+              <p>
+                Luxury pet spa products & personalized subscription boxes for
+                your furry friend.
+              </p>
+              <div className="hero-buttons">
+                <a href="#newsletter" className="btn btn-primary">
+                  Subscribe Now
+                </a>
+                <a href="#shop" className="btn btn-secondary">
+                  Shop Products
+                </a>
+              </div>
+            </div>
+            <div className="hero-image">
+              <img src={heroImage} alt="Dog enjoying spa treatment" />
+            </div>
+          </div>
+        </div>
+      </Slider>
+    </section>
+  );
 };
 
 export default Banner;

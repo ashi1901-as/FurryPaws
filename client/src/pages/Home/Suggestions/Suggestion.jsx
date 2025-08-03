@@ -9,7 +9,7 @@ import { getRandomProducts } from "../../../utils/functions";
 const Suggestion = ({ title, tagline }) => {
     return (
         <section className="bg-white w-full p-0 shadow overflow-hidden">
-            {/* <!-- header --> */}
+            
             <div className="flex px-6 py-4 justify-between items-center">
                 <div className="title flex flex-col gap-0.5">
                     <h1 className="text-[22px] font-[500]">{title}</h1>

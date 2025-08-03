@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import Product from "./Product";
 import Slider from "react-slick";
 import { NextBtn, PreviousBtn } from "../Banner/Banner";
@@ -43,7 +44,7 @@ const ProductSlider = ({ title, products, logo }) => {
     return (
         <section className="bg-white w-full shadow p-0 overflow-hidden">
             <div className="flex flex-col md:flex-row w-full items-center">
-                {/* Left Side */}
+            
                 <div className="flex flex-row md:flex-col h-full gap-6 w-[100%] md:w-[20%] items-center justify-around">
                     <h1 className="text-[22px] pt-5 font-medium">{title}</h1>
                     <Link
@@ -61,7 +62,7 @@ const ProductSlider = ({ title, products, logo }) => {
                     )}
                 </div>
 
-                {/* Right Side (Slider) */}
+                
                 <Slider className="w-[100%] md:w-[80%]" {...settings}>
                     {products?.map((item, i) => (
                         <Product {...item} key={i} />

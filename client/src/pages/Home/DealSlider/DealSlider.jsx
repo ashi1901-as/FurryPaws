@@ -44,7 +44,7 @@ const DealSlider = ({ title }) => {
     return (
         <section className="bg-white w-full shadow p-0 overflow-hidden">
             <div className="flex flex-col md:flex-row items-center">
-                {/* Left Side */}
+                
                 <div className="flex flex-row md:flex-col gap-6 w-[100%] px-6 pt-8 md:w-[20%] justify-between items-center">
                     <h1 className="text-[22px] font-medium">{title}</h1>
                     <Link
@@ -55,7 +55,7 @@ const DealSlider = ({ title }) => {
                     </Link>
                 </div>
 
-                {/* Right Side (Slider) */}
+                
                 <Slider className="w-[100%] md:w-[80%]" {...settings}>
                     {getRandomProducts(offerProducts, 12).map((item, i) => (
                         <Product {...item} key={i} />

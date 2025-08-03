@@ -1,79 +1,42 @@
-import mobiles from "../../assets/images/Categories/phone.png";
-import fashion from "../../assets/images/Categories/fashion.png";
-import electronics from "../../assets/images/Categories/electronics.png";
-import home from "../../assets/images/Categories/home.png";
-import travel from "../../assets/images/Categories/travel.png";
-import appliances from "../../assets/images/Categories/appliances.png";
-import furniture from "../../assets/images/Categories/furniture.png";
-import beauty from "../../assets/images/Categories/beauty.png";
-import grocery from "../../assets/images/Categories/grocery.png";
 import { Link } from "react-router-dom";
+import { Smartphone, Shirt, Laptop, Home, Plane, WashingMachine, Sofa, Sparkles, ShoppingCart } from "lucide-react";
 
 const catNav = [
-    {
-        name: "Mobiles",
-        icon: mobiles,
-    },
-    {
-        name: "Fashion",
-        icon: fashion,
-    },
-    {
-        name: "Electronics",
-        icon: electronics,
-    },
-    {
-        name: "Home",
-        icon: home,
-    },
-    {
-        name: "Travel",
-        icon: travel,
-    },
-    {
-        name: "Appliances",
-        icon: appliances,
-    },
-    {
-        name: "Furniture",
-        icon: furniture,
-    },
-    {
-        name: "Beauty,Toys & more",
-        icon: beauty,
-    },
-    {
-        name: "Grocery",
-        icon: grocery,
-    },
+  { name: "Mobiles", icon: Smartphone },
+  { name: "Fashion", icon: Shirt },
+  { name: "Electronics", icon: Laptop },
+  { name: "Home", icon: Home },
+  { name: "Travel", icon: Plane },
+  { name: "Appliances", icon: WashingMachine },
+  { name: "Furniture", icon: Sofa },
+  { name: "Beauty & More", icon: Sparkles },
+  { name: "Grocery", icon: ShoppingCart },
 ];
 
 const Categories = () => {
-    return (
-        <section className="hidden sm:block bg-white p-0 min-w-full px-12 shadow overflow-hidden">
-            <div className="flex items-center justify-between group">
-                {catNav.map((item, i) => (
-                    <Link
-                        to={`/products?category=${item.name}`}
-                        className="flex flex-col gap-1 items-center p-2"
-                        key={i}
-                    >
-                        <div className="h-16 w-16 ">
-                            <img
-                                draggable="false"
-                                className="h-full w-full object-contain"
-                                src={item.icon}
-                                alt={item.name}
-                            />
-                        </div>
-                        <span className="text-sm text-gray-800 font-medium group-hover:text-primary-blue">
-                            {item.name}
-                        </span>
-                    </Link>
-                ))}
-            </div>
-        </section>
-    );
+  return (
+    <section className="hidden sm:block bg-[#F5F3E7] py-5 shadow-sm">
+      <div className="flex items-center justify-center gap-10">
+        {catNav.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <Link
+              to={`/products?category=${item.name}`}
+              key={i}
+              className="flex flex-col items-center gap-2 group transition-all duration-300"
+            >
+              <div className="h-14 w-14 flex items-center justify-center rounded-full bg-white shadow-md group-hover:bg-[#FCA311] transition-all duration-300">
+                <Icon className="h-6 w-6 text-[#14213D] group-hover:text-white transition-all duration-300" />
+              </div>
+              <span className="text-sm font-medium text-[#14213D] group-hover:text-[#FCA311] transition-colors">
+                {item.name}
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
+  );
 };
 
 export default Categories;

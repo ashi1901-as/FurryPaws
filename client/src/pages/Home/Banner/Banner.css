@@ -1,24 +1,164 @@
-.slick-arrow.slick-prev,
-.slick-arrow.slick-next {
-    width: 40px;
-    height: 100px;
-    display: flex;
+:root {
+  --primary-color: #88c4be;
+  --primary-dark: #68a39e;
+  --primary-light: #a9dbd6;
+  --secondary-color: #f8c6b6;
+  --secondary-dark: #e5a692;
+  --text-dark: #333;
+  --text-medium: #555;
+  --border-radius: 10px;
+  --transition: all 0.3s ease;
+}
+:root {
+  --primary-color: #88c4be;
+  --primary-dark: #68a39e;
+  --primary-light: #a9dbd6;
+  --secondary-color: #f8c6b6;
+  --secondary-dark: #e5a692;
+  --text-dark: #333;
+  --text-medium: #555;
+  --border-radius: 10px;
+  --transition: all 0.3s ease;
+}
+
+/* Banner Section */
+.banner-section {
+  margin: 2rem auto;
+  padding: 3rem 2rem;
+  background-color: var(--primary-light);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Slick slider overrides */
+.slick-slide {
+  display: flex !important;
+  justify-content: center;
+}
+
+.slick-list {
+  overflow: hidden;
+}
+
+/* Hero Layout */
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: nowrap; /* Keep side-by-side on large screens */
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 240px;
+  max-width: 500px;
+}
+
+.hero-content h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-dark);
+}
+
+.hero-content p {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  margin-bottom: 1.5rem;
+  color: var(--text-medium);
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+/* Buttons */
+.hero-buttons .btn {
+  padding: 0.8rem 1.6rem;
+  border-radius: var(--border-radius);
+  font-weight: 600;
+  transition: var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+.btn-secondary {
+  background-color: var(--secondary-color);
+  color: var(--text-dark);
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+/* Hero Image */
+.hero-image {
+  flex: 1;
+  min-width: 240px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: rotate(2deg);
+  object-fit: cover;
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  border: 2px dashed var(--primary-color);
+  border-radius: var(--border-radius);
+  transform: rotate(-2deg);
+  z-index: -1;
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 992px) {
+  .hero-container {
+    flex-direction: column;
     align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+  .hero-buttons {
     justify-content: center;
-    box-shadow: 0 8px 12px rgba(0,0,0,.2);
-    background: #fcfcfc;
-    color: #030303;
-    z-index: 1;
+  }
+  .hero-image {
+    max-width: 300px;
+  }
 }
-.slick-prev {
-    left: 0;
-    border-radius: 0 5px 5px 0;
-}
-.slick-next {
-    right: 0;
-    border-radius: 5px 0 0 5px;
-}
-.slick-prev::before,
-.slick-next::before {
-    display: none;
+
+@media (max-width: 576px) {
+  .banner-section {
+    padding: 1.5rem 1rem;
+  }
+  .hero-content h2 {
+    font-size: 1.6rem;
+  }
+  .hero-content p {
+    font-size: 1rem;
+  }
+  .hero-image {
+    max-width: 260px;
+  }
 }
