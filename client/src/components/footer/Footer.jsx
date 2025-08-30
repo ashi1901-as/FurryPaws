@@ -11,10 +11,10 @@ const Footer = () => (
 
       {/* Navigation Links */}
       <div className="flex flex-wrap justify-center gap-6 text-sm font-light mb-6">
-        <a href="#" className="hover:text-[#d7d1b1] transition-colors">Home</a>
-        <a href="#" className="hover:text-[#d7d1ad] transition-colors">Shop</a>
-        <a href="#" className="hover:text-[#e6e0be] transition-colors">About</a>
-        <a href="#" className="hover:text-[#d8d2ad] transition-colors">Contact</a>
+        <a href="#" className="hover:text-[#f2c4bb] transition-colors">Home</a>
+        <a href="#" className="hover:text-[#f2c4bb] transition-colors">Shop</a>
+        <a href="#" className="hover:text-[#f2c4bb] transition-colors">About</a>
+        <a href="#" className="hover:text-[#f2c4bb] transition-colors">Contact</a>
       </div>
 
       {/* Social Icons */}
@@ -23,7 +23,7 @@ const Footer = () => (
           <a
             key={index}
             href="#"
-            className="p-2 rounded-full bg-white/10 hover:bg-[#d8d2ad] transition-all duration-300"
+            className="p-2 rounded-full bg-white/10 hover:bg-[#f2c4bb] transition-all duration-300"
           >
             <Icon size={18} className="text-white" />
           </a>

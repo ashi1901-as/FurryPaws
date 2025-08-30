@@ -60,10 +60,10 @@ const Header = () => {
       ref={headerRef}
       className="sticky top-0 z-50 transition-all duration-300"
     >
-      <nav className="w-full bg-white px-4 py-3 flex items-center justify-between rounded-none">
+      <nav className="w-full bg-[#2e2f2f] px-10 py-3 flex items-center justify-between rounded-none">
         
         {/* Logo */}
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center ml-4">
           <img src={logo} alt="logo" className="h-8 object-contain" />
         </Link>
 
@@ -76,7 +76,7 @@ const Header = () => {
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-gray-500 text-2xl">
+        <div className="hidden md:flex items-center gap-8 text-gray-500 text-2xl mr-4">
           <NavLink to="/" className="hover:text-[#62d3f3] transition-colors">
             <BiHomeSmile />
           </NavLink>

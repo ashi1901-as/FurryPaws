@@ -17,49 +17,78 @@ import furnitureCard from "../../assets/images/furniture-card.jpg";
 import Suggestion from "./Suggestions/Suggestion";
 import SeoData from "../../SEO/SeoData";
 
-const Home = () => {
-    return (
-        <>
-            <SeoData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
-            <ScrollToTopOnRouteChange />
-            <Categories />
-            <main className="flex flex-col items-center gap-3 px-2 pb-5 sm:mt-2">
-                
-                <Banner />
-                <DealSlider title={"Discounts for You"} />
-                <ProductSlider
-                    title={"Best of Electronics"}
-                    products={electronicProducts}
-                    logo={electronics}
-                />
-                <ProductSlider
-                    title={"Beauty, Toys & More"}
-                    products={accessories}
-                    logo={accessoryCard}
-                />
-                <Suggestion
-                    title={"Suggested for You"}
-                    tagline={"Based on Your Activity"}
-                />
 
-                <ProductSlider
-                    title={"Fashion Top Deals"}
-                    products={fashionProducts}
-                    logo={fashionCard}
-                />
-                <ProductSlider
-                    title={"TVs & Appliances"}
-                    products={applianceProducts}
-                    logo={applianceCard}
-                />
-                <ProductSlider
-                    title={"Furniture & More"}
-                    products={furnitureProducts}
-                    logo={furnitureCard}
-                />
-            </main>
-        </>
-    );
+
+const Home = () => {
+  return (
+    <>
+      <SeoData title="Pet Care Store – Food, Grooming, Toys & More" />
+      <ScrollToTopOnRouteChange />
+      <Categories />
+      <Banner />
+
+      <main className="flex flex-col items-center gap-8 px-4 py-10 sm:mt-6 bg-[#fffaf7]">
+
+        {/* Deals 
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <DealSlider title={"🎉 Special Offers for Your Pets"} />
+        </section>*/}
+
+        {/* Food */}
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <ProductSlider
+            title={"🍖 Pet Food & Treats"}
+            products={electronicProducts}
+            logo={electronics}
+          />
+        </section>
+
+        {/* Grooming */}
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <ProductSlider
+            title={"🛁 Grooming & Care"}
+            products={accessories}
+            logo={accessoryCard}
+          />
+        </section>
+
+        {/* Suggestions */}
+        <section className="w-full max-w-6xl bg-gradient-to-r from-[#fdf2f2] to-[#fefaf6] rounded-2xl shadow-sm border border-[#f2e9e4] p-8">
+          <Suggestion
+            title={"✨ Recommended for Your Pet"}
+            tagline={"Based on your pet’s needs"}
+          />
+        </section>
+
+        {/* Toys */}
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <ProductSlider
+            title={"🎾 Toys & Playtime"}
+            products={fashionProducts}
+            logo={fashionCard}
+          />
+        </section>
+
+        {/* Vet Care */}
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <ProductSlider
+            title={"💊 Health & Vet Care"}
+            products={applianceProducts}
+            logo={applianceCard}
+          />
+        </section>
+
+        {/* Accessories */}
+        <section className="w-full max-w-6xl bg-white rounded-2xl shadow-sm border border-[#f2e9e4] p-6">
+          <ProductSlider
+            title={"🦴 Pet Accessories"}
+            products={furnitureProducts}
+            logo={furnitureCard}
+          />
+        </section>
+      </main>
+    </>
+  );
 };
 
 export default Home;

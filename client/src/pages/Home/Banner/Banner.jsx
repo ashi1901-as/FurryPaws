@@ -63,7 +63,7 @@ const Banner = () => {
               </p>
               <div className="hero-buttons">
                 <a href="#newsletter" className="btn btn-primary">
-                  Subscribe Now
+                  Read and Learn about your pets
                 </a>
                 <a href="#shop" className="btn btn-secondary">
                   Shop Products
