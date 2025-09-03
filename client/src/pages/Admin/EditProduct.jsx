@@ -180,7 +180,7 @@ const EditProduct = () => {
             });
 
             // send a put request to replace data on server
-            const response = await axios.patch(
+            const response = await axios.post(
                 `${
                     import.meta.env.VITE_SERVER_URL
                 }/api/v1/product/update/${productId}`,

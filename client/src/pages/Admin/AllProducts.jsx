@@ -5,7 +5,7 @@ import { useAuth } from "../../context/auth";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
-import Rating from "@mui/material/Rating";
+//import Rating from "@mui/material/Rating";
 import Actions from "./Actions";
 import SeoData from "../../SEO/SeoData";
 
@@ -57,13 +57,13 @@ const AllProducts = () => {
   {
     field: "id",
     headerName: "Product ID",
-    minWidth: 100,
+    minWidth: 200,
     flex: 0.5,
   },
   {
     field: "name",
     headerName: "Name",
-    minWidth: 200,
+    minWidth: 170,
     flex: 1,
     renderCell: (params) => {
       return (
@@ -113,7 +113,7 @@ const AllProducts = () => {
     field: "price",
     headerName: "Price",
     type: "number",
-    minWidth: 100,
+    minWidth: 80,
     headerAlign: "left",
     align: "left",
     flex: 0.2,
@@ -123,9 +123,9 @@ const AllProducts = () => {
   },
   {
     field: "discount_price",
-    headerName: "Discount Price",
+    headerName: "D_Price",
     type: "number",
-    minWidth: 100,
+    minWidth: 80,
     headerAlign: "left",
     align: "left",
     flex: 0.2,
@@ -135,7 +135,7 @@ const AllProducts = () => {
       );
     },
   },
-  {
+  /*{
     field: "rating",
     headerName: "Rating",
     type: "number",
@@ -153,17 +153,17 @@ const AllProducts = () => {
         />
       );
     },
-  },
+  },*/
   {
     field: "actions",
     headerName: "Actions",
-    minWidth: 150, // ⬅️ Increased so icons don’t get squished
+    minWidth: 120, // ⬅️ Increased so icons don’t get squished
     flex: 0.5,
     sortable: false,
     renderCell: (params) => {
-      console.log("Actions cell:", params.row); // ⬅️ Debug log
+     // console.log("Actions cell:", params.row); // ⬅️ Debug log
       return (
-        <div className="flex gap-2 bg-yellow-100 p-1 rounded">
+        <div className="flex gap-2 p-1 rounded">
           <Actions
             id={params.row.id}
             name={params.row.name}
@@ -204,7 +204,7 @@ const AllProducts = () => {
                         </h1>
                         <Link
                             to="/admin/dashboard/add-product"
-                            className="py-2 px-4 rounded shadow font-[500] text-white bg-primaryBlue hover:shadow-lg"
+                            className="py-2 px-4 rounded shadow font-[500] text-white bg-[#88e0d8] hover:bg-[#7ac7c0]"
                         >
                             New Product
                         </Link>

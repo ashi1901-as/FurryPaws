@@ -31,7 +31,7 @@ router.get("/filtered-products", getFilteredProducts);
 router.get("/:id", findProduct);
 
 // Update product details from product id
-router.patch("/update/:id", requireSignIn, isAdmin, updateProduct);
+router.post("/update/:id", requireSignIn, isAdmin, updateProduct);
 
 // Search products using keyword
 router.get("/search/:keyword", searchProductController);

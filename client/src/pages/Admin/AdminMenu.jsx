@@ -1,86 +1,34 @@
 import { NavLink } from "react-router-dom";
+import { FaUser, FaShoppingBag, FaBoxOpen, FaPlus, FaUsers } from "react-icons/fa";
 
 const AdminMenu = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  const menuItems = [
+    { name: "Profile", to: "profile", icon: <FaUser /> },
+    { name: "Orders", to: "/admin/orders", icon: <FaShoppingBag /> },
+    { name: "Products", to: "all-products", icon: <FaBoxOpen /> },
+    { name: "Add Product", to: "add-product", icon: <FaPlus /> },
+    { name: "Users", to: "users", icon: <FaUsers /> },
+  ];
 
   return (
-    <div className="flex flex-col">
-      {/* Profile (inside AdminDashboard) */}
-      <NavLink
-        to="profile"
-        onClick={scrollToTop}
-        className={({ isActive }) =>
-          isActive
-            ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-            : ""
-        }
-      >
-        <div className="h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-          Profile
-        </div>
-      </NavLink>
-
-      {/* Orders (separate route: /admin/orders) */}
-      <NavLink
-        to="/admin/orders"
-        onClick={scrollToTop}
-        className={({ isActive }) =>
-          isActive
-            ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-            : ""
-        }
-      >
-        <div className="h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-          Orders
-        </div>
-      </NavLink>
-
-      {/* Products (inside AdminDashboard) */}
-      <NavLink
-        to="all-products"
-        onClick={scrollToTop}
-        className={({ isActive }) =>
-          isActive
-            ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-            : ""
-        }
-      >
-        <div className="h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-          Products
-        </div>
-      </NavLink>
-
-      {/* Add Product (inside AdminDashboard) */}
-      <NavLink
-        to="add-product"
-        onClick={scrollToTop}
-        className={({ isActive }) =>
-          isActive
-            ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-            : ""
-        }
-      >
-        <div className="h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-          Add Product
-        </div>
-      </NavLink>
-
-      {/* Users (inside AdminDashboard) */}
-      <NavLink
-        to="users"
-        onClick={scrollToTop}
-        className={({ isActive }) =>
-          isActive
-            ? "font-[600] text-primaryBlue bg-[#f1f3f5]"
-            : ""
-        }
-      >
-        <div className="h-[40px] px-[60px] flex items-center hover:text-primaryBlue hover:bg-[#f1f3f5]">
-          Users
-        </div>
-      </NavLink>
+    <div className="flex flex-col gap-2 p-4 bg-white rounded-lg shadow-md w-64">
+      {menuItems.map((item) => (
+        <NavLink
+          key={item.name}
+          to={item.to}
+          className={({ isActive }) =>
+            `flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-300 
+            ${
+              isActive
+                ? "bg-[#88e0d8] text-white font-semibold shadow"
+                : "hover:bg-[#f1f3f5] hover:text-[black] text-gray-700"
+            }`
+          }
+        >
+          <div className="text-lg">{item.icon}</div>
+          <span className="text-sm sm:text-base">{item.name}</span>
+        </NavLink>
+      ))}
     </div>
   );
 };

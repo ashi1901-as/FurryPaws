@@ -56,14 +56,14 @@ const Actions = ({ id, name, updateDeletedProduct }) => {
             <div className="flex justify-between items-center gap-3">
                 <Link
                     to={`/admin/dashboard/product/${id}`}
-                    className="text-blue-600 hover:bg-blue-200 p-[1px] rounded-full bg-blue-100"
+                    className="text-blue-600 hover:bg-blue-200 p-[1px] rounded-full"
                 >
                     <EditIcon />
                 </Link>
 
                 <button
                     onClick={() => setOpen(true)}
-                    className="text-red-600 hover:bg-red-200 p-[1px] rounded-full bg-red-100"
+                    className="text-red-600 hover:bg-red-200 p-[1px] rounded-full "
                 >
                     <DeleteIcon />
                 </button>

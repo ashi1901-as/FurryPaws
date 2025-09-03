@@ -289,7 +289,7 @@ const CreateProduct = () => {
                                 />
                                 <span
                                     onClick={addHighlight}
-                                    className="py-2 px-6 bg-primaryBlue text-white rounded-r hover:shadow-lg cursor-pointer"
+                                    className="py-2 px-6 bg-[#88e0d8] text-white rounded-r hover:shadow-lg cursor-pointer"
                                 >
                                     Add
                                 </span>
@@ -345,7 +345,7 @@ const CreateProduct = () => {
                                     </span>
                                 </span>
                             </div>
-                            <label className="rounded bg-primaryBlue text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
+                            <label className="rounded bg-[#88e0d8] text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
                                 <input
                                     type="file"
                                     name="logo"
@@ -386,7 +386,7 @@ const CreateProduct = () => {
                             />
                             <span
                                 onClick={addSpecs}
-                                className="py-2 px-6 bg-primaryBlue text-white rounded hover:shadow-lg cursor-pointer"
+                                className="py-2 px-6 bg-[#88e0d8] text-white rounded hover:shadow-lg cursor-pointer"
                             >
                                 Add
                             </span>
@@ -430,7 +430,7 @@ const CreateProduct = () => {
                                 />
                             ))}
                         </div>
-                        <label className="rounded font-medium bg-primaryBlue text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2">
+                        <label className="rounded font-medium bg-[#88e0d8] text-center cursor-pointer text-white p-2 shadow hover:shadow-lg my-2">
                             <input
                                 type="file"
                                 name="images"
@@ -446,7 +446,7 @@ const CreateProduct = () => {
                             <input
                                 form="mainForm"
                                 type="submit"
-                                className="bg-orange uppercase w-full p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
+                                className="bg-[#e5a692] uppercase w-full p-3 text-white font-medium rounded shadow hover:shadow-lg cursor-pointer"
                                 value="Submit"
                             />
                         </div>
