@@ -7,20 +7,25 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "./context/auth.jsx";
 import { CartProvider } from "./context/cart.jsx";
+import { HelmetProvider } from "react-helmet-async"; // ✅ import HelmetProvider
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-    <AuthProvider>
+  <React.StrictMode>
+    <HelmetProvider> {/* ✅ Wrap your app */}
+      <AuthProvider>
         <CartProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-            <ToastContainer
-                style={{
-                    fontSize: "14px",
-                    zIndex: 900,
-                }}
-                autoClose={2000}
-            />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+          <ToastContainer
+            style={{
+              fontSize: "14px",
+              zIndex: 900,
+            }}
+            autoClose={2000}
+          />
         </CartProvider>
-    </AuthProvider>
+      </AuthProvider>
+    </HelmetProvider>
+  </React.StrictMode>
 );

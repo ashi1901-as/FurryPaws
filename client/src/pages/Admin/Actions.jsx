@@ -32,7 +32,7 @@ const Actions = ({ id, name, updateDeletedProduct }) => {
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
-                        Authorization: auth?.token,
+                         Authorization: `Bearer ${auth?.token}`,
                     },
                 }
             );

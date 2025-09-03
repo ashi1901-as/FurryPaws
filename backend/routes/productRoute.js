@@ -8,28 +8,32 @@ import updateProduct from "../controllers/product/updateProduct.js";
 import getFilteredProducts from "../controllers/product/getFilteredProducts.js";
 import searchProductController from "../controllers/product/searchProductController.js";
 
-//router object
+// router object
 const router = express.Router();
+console.log("✅ productRoute file loaded");
+// Add new product POST
+router.post("/new-product", requireSignIn, isAdmin, (req, res, next) => {
+  console.log("🔥 Route hit: /new-product");
+  next();
+}, newProduct);
 
-//Add new product POST
-router.post("/new-product", isAdmin, newProduct);
 
-//Get Seller Product
-router.get("/seller-product", isAdmin, getSellerProducts);
+// Get Seller Product
+router.get("/seller-product", requireSignIn, isAdmin, getSellerProducts);
 
-//Delete Product
-router.post("/delete-product", isAdmin, deleteProduct);
+// Delete Product
+router.post("/delete-product", requireSignIn, isAdmin, deleteProduct);
 
-//find filtered product
+// Find filtered product
 router.get("/filtered-products", getFilteredProducts);
 
-//find product details from product id
+// Find product details from product id
 router.get("/:id", findProduct);
 
-//update product details from product id
-router.patch("/update/:id", isAdmin, updateProduct);
+// Update product details from product id
+router.patch("/update/:id", requireSignIn, isAdmin, updateProduct);
 
-// search products using keyword
+// Search products using keyword
 router.get("/search/:keyword", searchProductController);
 
 export default router;

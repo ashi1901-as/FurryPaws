@@ -30,7 +30,7 @@ const UpdateOrders = () => {
                     }/api/v1/user/admin-order-detail?orderId=${orderId}`,
                     {
                         headers: {
-                            Authorization: auth?.token,
+                            Authorization: `Bearer ${auth?.token}`,
                         },
                     }
                 );

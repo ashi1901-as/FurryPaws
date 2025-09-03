@@ -14,7 +14,9 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
 
-  const { auth, LogOut } = useAuth();
+const { auth, setAuth } = useAuth();
+
+
   const [cartItems] = useCart();
 
   let closeTimeout;
@@ -29,8 +31,10 @@ const Header = () => {
   };
 
   const handleLogout = () => {
-    LogOut();
-  };
+  setAuth({ user: null, token: "" });
+  localStorage.removeItem("auth");
+};
+
 
   const handleStickyHeader = () => {
     if (window.scrollY > 0) {

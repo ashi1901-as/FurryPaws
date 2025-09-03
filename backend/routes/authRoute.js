@@ -35,11 +35,13 @@ router.get("/user-auth", requireSignIn, (req, res) => {
 });
 
 //protected Admin route
-router.get("/admin-auth", isAdmin, (req, res) => {
-    res.status(200).send({
-        ok: true,
-    });
+//protected Admin route
+router.get("/admin-auth", requireSignIn, isAdmin, (req, res) => {
+  res.status(200).send({
+    ok: true,
+  });
 });
+
 
 // update details POST route\
 router.post("/update-details", updateDetailsController);

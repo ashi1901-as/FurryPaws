@@ -1,51 +1,64 @@
-/* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
-import { useAuth } from "../context/auth";
-import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Spinner from "../components/Spinner";
 import { toast } from "react-toastify";
+import Spinner from "../components/Spinner";
+import { useAuth } from "../context/auth";
 
 const AdminRoute = () => {
-    const [ok, setOk] = useState(false);
-    const { auth, setAuth, LogOut, isAdmin, isContextLoading } = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
+  const [ok, setOk] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const {auth} = useAuth();  // ✅ only 2 values
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        const authCheck = async () => {
-            try {
-                const res = await axios.get(
-                    `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/admin-auth`,
-                    {
-                        headers: {
-                            Authorization: auth?.token,
-                        },
-                    }
-                );
+  useEffect(() => {
+    const authCheck = async () => {
+      if (!auth?.token) {
+        navigate("/login", { state: location.pathname });
+        return;
+      }
 
-                setOk(res.data.ok === true); // Update ok based on the response
-            } catch (error) {
-                console.log(error);
+      try {
+        const res = await axios.get(
+          `${import.meta.env.VITE_SERVER_URL}/api/v1/auth/admin-auth`,
+          {
+            headers: { Authorization: `Bearer ${auth?.token}` },
 
-                if (error.response?.status === 401 && !isContextLoading) {
-                    // When isContextLoading becomes false, it means the context has been loaded
-                    setTimeout(() => {
-                        toast.error("Admin Privileges Required!", {
-                            toastId: "userNotAdmin",
-                        });
+          }
+        );
 
-                        navigate("/", {
-                            state: location.pathname,
-                        });
-                    }, 500);
-                }
-            }
-        };
-        !isContextLoading && authCheck();
-    }, [auth?.token, isContextLoading, location.pathname, navigate]);
+        if (res.data?.ok) {
+          setOk(true);
+        } else {
+          setOk(false);
+          navigate("/login", { state: location.pathname });
+        }
+      } catch (error) {
+        console.error("Admin check failed:", error);
 
-    return ok ? <Outlet /> : <Spinner />;
+        if (
+          error.response?.status === 401 ||
+          error.response?.status === 403
+        ) {
+          toast.error("Admin Privileges Required!", {
+            toastId: "userNotAdmin",
+          });
+          navigate("/login", { state: location.pathname });
+        }
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    authCheck();
+  }, [auth?.token, location.pathname, navigate]);
+
+  if (loading) {
+    return <Spinner />;
+  }
+
+  return ok ? <Outlet /> : null;
 };
 
 export default AdminRoute;

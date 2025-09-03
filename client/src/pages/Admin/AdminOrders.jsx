@@ -7,36 +7,45 @@ import { useAuth } from "../../context/auth";
 import SeoData from "../../SEO/SeoData";
 
 const AdminOrders = () => {
-    const {auth} = useAuth();
+    const { auth } = useAuth();
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(false);
     const [orders, setOrders] = useState([]);
+    const [error, setError] = useState("");
 
     useEffect(() => {
-        // fetch orders from server
+        if (!auth?.token) {
+            console.log("❌ No auth token found");
+            setError("You are not authorized. Please log in.");
+            return;
+        }
+
         const fetchOrders = async () => {
             try {
                 setLoading(true);
                 const response = await axios.get(
-                    `${
-                        import.meta.env.VITE_SERVER_URL
-                    }/api/v1/user/admin-orders`,
+                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/admin-orders`,
                     {
                         headers: {
-                            Authorization: auth?.token,
+                            Authorization: `Bearer ${auth.token}`,
                         },
                     }
                 );
-                console.log(response.data.orders);
-                if (response?.data?.orders) {
-                    setOrders(response.data.orders);
-                    setLoading(false);
-                }
-            } catch (error) {
-                console.log(error);
+
+                setOrders(response.data.orders || []);
                 setLoading(false);
+            } catch (err) {
+                console.error("Error fetching orders:", err.response || err);
+                setLoading(false);
+
+                if (err.response?.status === 401) {
+                    setError("Unauthorized. Please log in again.");
+                } else {
+                    setError("Failed to fetch orders. Try again later.");
+                }
             }
         };
+
         fetchOrders();
     }, [auth?.token]);
 
@@ -44,41 +53,38 @@ const AdminOrders = () => {
         <>
             <SeoData title="Admin Orders | Flipkart" />
 
-            <main className="w-full px-4 sm:px-10 py-4 ">
-                {/* <!-- row --> */}
-                {/* <!-- orders column --> */}
-                <div className="flex gap-3.5 w-full ">
+            <main className="w-full px-4 sm:px-10 py-4">
+                <div className="flex gap-3.5 w-full">
                     {loading ? (
                         <Spinner />
+                    ) : error ? (
+                        <div className="flex items-center justify-center p-10 bg-white rounded">
+                            <p className="text-red-600 font-medium">{error}</p>
+                        </div>
                     ) : (
                         <div className="flex flex-col gap-3 w-full pb-5 overflow-hidden">
-                            {/* <!-- searchbar --> */}
-                            <form
-                                // onSubmit={searchOrders}
-                                className="flex items-center justify-between mx-auto w-[100%] sm:w-10/12 bg-white border rounded mb-2 hover:shadow-md"
-                            >
+                            {/* Search bar */}
+                            <form className="flex items-center justify-between mx-auto w-[100%] sm:w-10/12 bg-white border rounded mb-2 hover:shadow-md">
                                 <input
                                     value={search}
                                     onChange={(e) => setSearch(e.target.value)}
                                     type="search"
                                     name="search"
                                     placeholder="Search your orders here"
-                                    className="p-2 text-sm outline-none flex-1 rounded-l "
+                                    className="p-2 text-sm outline-none flex-1 rounded-l"
                                 />
                                 <button
                                     type="submit"
                                     className="h-full text-sm px-1 sm:px-4 py-2.5 text-white bg-primaryBlue hover:bg-blue-600 rounded-r flex items-center gap-1"
                                 >
                                     <SearchIcon sx={{ fontSize: "20px" }} />
-                                    <p className="text-[10px] sm:text-[14px]">
-                                        Search
-                                    </p>
+                                    <p className="text-[10px] sm:text-[14px]">Search</p>
                                 </button>
                             </form>
-                            {/* <!-- search bar --> */}
 
-                            {orders?.length === 0 && (
-                                <div className="flex items-center flex-col gap-2 p-10 bg-white rounded-sm ">
+                            {/* Orders */}
+                            {orders?.length === 0 ? (
+                                <div className="flex items-center flex-col gap-2 p-10 bg-white rounded-sm">
                                     <img
                                         draggable="false"
                                         src="https://rukminim1.flixcart.com/www/100/100/promos/23/08/2020/c5f14d2a-2431-4a36-b6cb-8b5b5e283d4f.png"
@@ -89,40 +95,29 @@ const AdminOrders = () => {
                                     </span>
                                     <p>Get some orders first</p>
                                 </div>
+                            ) : (
+                                orders
+                                    .slice()
+                                    .reverse()
+                                    .map((order) =>
+                                        order.products.map((item, index) => (
+                                            <OrderItem
+                                                key={index}
+                                                item={item}
+                                                orderId={order._id}
+                                                orderStatus={order.orderStatus}
+                                                createdAt={order.createdAt}
+                                                paymentId={order.paymentId}
+                                                buyer={order.buyer}
+                                                shippingInfo={order.shippingInfo}
+                                                amount={order.amount}
+                                            />
+                                        ))
+                                    )
                             )}
-
-                            {orders
-                                ?.map((order) => {
-                                    const {
-                                        _id,
-                                        orderStatus,
-                                        buyer,
-                                        createdAt,
-                                        paymentId,
-                                        shippingInfo,
-                                        amount,
-                                        products,
-                                    } = order;
-                                    return products.map((item, index) => (
-                                        <OrderItem
-                                            item={item}
-                                            key={index}
-                                            orderId={_id}
-                                            orderStatus={orderStatus}
-                                            createdAt={createdAt}
-                                            paymentId={paymentId}
-                                            buyer={buyer}
-                                            shippingInfo={shippingInfo}
-                                            amount={amount}
-                                        />
-                                    ));
-                                })
-                                .reverse()}
                         </div>
                     )}
                 </div>
-                {/* <!-- orders column --> */}
-                {/* <!-- row --> */}
             </main>
         </>
     );

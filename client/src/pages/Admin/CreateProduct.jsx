@@ -14,7 +14,7 @@ import ScrollToTopOnRouteChange from "./../../utils/ScrollToTopOnRouteChange";
 import SeoData from "../../SEO/SeoData";
 
 const CreateProduct = () => {
-    const { auth } = useAuth();
+    const {auth} = useAuth();
     const navigate = useNavigate();
 
     const [highlights, setHighlights] = useState([]);
@@ -27,11 +27,11 @@ const CreateProduct = () => {
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState();
-    const [discountPrice, setDiscountPrice] = useState();
+    const [price, setPrice] = useState("");          // ✅ fixed
+    const [discountPrice, setDiscountPrice] = useState(""); // ✅ fixed
     const [category, setCategory] = useState("");
-    const [stock, setStock] = useState();
-    const [warranty, setWarranty] = useState();
+    const [stock, setStock] = useState("");          // ✅ fixed
+    const [warranty, setWarranty] = useState("");    // ✅ fixed
     const [brand, setBrand] = useState("");
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
@@ -70,54 +70,35 @@ const CreateProduct = () => {
         setSpecs(specs.filter((s, i) => i !== index));
     };
 
-    const handleLogoChange = (e) => {
-        const file = e.target.files[0];
+   const handleLogoChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
+    if (file.size > MAX_IMAGE_SIZE) {
+        toast.warning("Logo image size exceeds 500 KB!");
+        return;
+    }
+    setLogo(file);
+    setLogoPreview(URL.createObjectURL(file));
+};
+
+
+   const handleProductImageChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (files.length > MAX_IMAGES_COUNT) {
+        toast.warning("You can only upload up to 4 images");
+        return;
+    }
+
+    files.forEach((file) => {
         if (file.size > MAX_IMAGE_SIZE) {
-            toast.warning("Logo image size exceeds 500 KB!");
+            toast.warning("One of the product images exceeds 500 KB");
             return;
         }
-        const reader = new FileReader();
-
-        reader.onload = () => {
-            if (reader.readyState === 2) {
-                setLogoPreview(reader.result);
-                setLogo(reader.result);
-            }
-        };
-
-        reader.readAsDataURL(file);
-    };
-
-    const handleProductImageChange = (e) => {
-        const files = Array.from(e.target.files);
-        // if more than 4 images then show warning
-        if (files.length > MAX_IMAGES_COUNT) {
-            toast.warning("You can only upload up to 4 images");
-            return;
-        }
-
-        files.forEach((file) => {
-            // check for image size
-            if (file.size > MAX_IMAGE_SIZE) {
-                toast.warning("One of the product images exceeds 500 KB");
-                // Skip the file if it exceeds the size limit
-                return;
-            }
-            const reader = new FileReader();
-
-            reader.onload = () => {
-                if (reader.readyState === 2) {
-                    setImagesPreview((oldImages) => [
-                        ...oldImages,
-                        reader.result,
-                    ]);
-                    setImages((oldImages) => [...oldImages, reader.result]);
-                }
-            };
-            reader.readAsDataURL(file);
-        });
-    };
+        setImages((old) => [...old, file]);
+        setImagesPreview((old) => [...old, URL.createObjectURL(file)]);
+    });
+};
 
     const newProductSubmitHandler = async (e) => {
         e.preventDefault();
@@ -127,7 +108,6 @@ const CreateProduct = () => {
         });
         setIsSubmit(true);
         try {
-            // required field checks
             if (!logo) {
                 toast.warning("Please Add Brand Logo");
                 return;
@@ -145,11 +125,11 @@ const CreateProduct = () => {
 
             formData.append("name", name);
             formData.append("description", description);
-            formData.append("price", price);
-            formData.append("discountPrice", discountPrice);
+            formData.append("price", Number(price));
+            formData.append("discountPrice", Number(discountPrice));
             formData.append("category", category);
-            formData.append("stock", stock);
-            formData.append("warranty", warranty);
+            formData.append("stock", Number(stock));
+            formData.append("warranty",Number( warranty));
             formData.append("brandName", brand);
             formData.append("logo", logo);
 
@@ -164,26 +144,28 @@ const CreateProduct = () => {
             specs.forEach((s) => {
                 formData.append("specifications", JSON.stringify(s));
             });
+
             const response = await axios.post(
                 `${import.meta.env.VITE_SERVER_URL}/api/v1/product/new-product`,
                 formData,
                 {
                     headers: {
                         "Content-Type": "multipart/form-data",
-                        Authorization: auth?.token,
+                        Authorization: `Bearer ${auth?.token}`, // ✅ fixed
                     },
                 }
             );
-            // on success->
-            response.status === 201 &&
+
+            if (response.status === 201) {
                 toast.success("Product Added Successfully!");
-            navigate("/admin/dashboard/all-products");
+                navigate("/admin/dashboard/all-products");
+            }
         } catch (error) {
             console.error("Error:", error);
             setIsSubmit(false);
-            //server error
-            error.response.status === 500 &&
+            if (error.response?.status === 500) {
                 toast.error("Something went wrong! Please try after sometime.");
+            }
         }
     };
 
@@ -229,9 +211,7 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                 }}
                                 required
                                 value={price}
@@ -243,9 +223,7 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                 }}
                                 required
                                 value={discountPrice}
@@ -277,9 +255,7 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                 }}
                                 required
                                 value={stock}
@@ -291,9 +267,7 @@ const CreateProduct = () => {
                                 variant="outlined"
                                 size="small"
                                 InputProps={{
-                                    inputProps: {
-                                        min: 0,
-                                    },
+                                    inputProps: { min: 0 },
                                 }}
                                 required
                                 value={warranty}
@@ -301,6 +275,7 @@ const CreateProduct = () => {
                             />
                         </div>
 
+                        {/* Highlights */}
                         <div className="flex flex-col gap-2">
                             <div className="flex justify-between items-center border rounded">
                                 <input
@@ -313,7 +288,7 @@ const CreateProduct = () => {
                                     className="px-2 flex-1 outline-none border-none"
                                 />
                                 <span
-                                    onClick={() => addHighlight()}
+                                    onClick={addHighlight}
                                     className="py-2 px-6 bg-primaryBlue text-white rounded-r hover:shadow-lg cursor-pointer"
                                 >
                                     Add
@@ -340,6 +315,7 @@ const CreateProduct = () => {
                             </div>
                         </div>
 
+                        {/* Brand Details */}
                         <h2 className="font-medium">Brand Details</h2>
                         <div className="flex flex-col sm:flex-row justify-between gap-4 items-start">
                             <TextField
@@ -381,6 +357,7 @@ const CreateProduct = () => {
                             </label>
                         </div>
 
+                        {/* Specifications */}
                         <h2 className="font-medium">
                             Specifications{" "}
                             <span className="text-xs text-gray-500">
@@ -408,7 +385,7 @@ const CreateProduct = () => {
                                 size="small"
                             />
                             <span
-                                onClick={() => addSpecs()}
+                                onClick={addSpecs}
                                 className="py-2 px-6 bg-primaryBlue text-white rounded hover:shadow-lg cursor-pointer"
                             >
                                 Add
@@ -435,6 +412,7 @@ const CreateProduct = () => {
                             ))}
                         </div>
 
+                        {/* Images */}
                         <h2 className="font-medium">
                             Product Images{" "}
                             <span className="ml-2 text-xs text-gray-500">
@@ -478,4 +456,5 @@ const CreateProduct = () => {
         </>
     );
 };
+
 export default CreateProduct;

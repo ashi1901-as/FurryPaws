@@ -10,7 +10,8 @@ import Actions from "./Actions";
 import SeoData from "../../SEO/SeoData";
 
 const AllProducts = () => {
-    const { auth } = useAuth();
+    const {auth} = useAuth();
+
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -22,7 +23,7 @@ const AllProducts = () => {
                     }/api/v1/product/seller-product`,
                     {
                         headers: {
-                            Authorization: auth.token,
+                          Authorization: `Bearer ${auth?.token}`,
                         },
                     }
                 );
@@ -53,124 +54,127 @@ const AllProducts = () => {
     };
 
     const columns = [
-        {
-            field: "id",
-            headerName: "Product ID",
-            minWidth: 100,
-            flex: 0.5,
-        },
-        {
-            field: "name",
-            headerName: "Name",
-            minWidth: 200,
-            flex: 1,
-            renderCell: (params) => {
-                return (
-                    <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full">
-                            <img
-                                draggable="false"
-                                src={params.row.image}
-                                alt={params.row.name}
-                                className="w-full h-full rounded-full object-cover"
-                            />
-                        </div>
-                        {params.row.name}
-                    </div>
-                );
-            },
-        },
-        {
-            field: "category",
-            headerName: "Category",
-            minWidth: 100,
-            flex: 0.1,
-        },
-        {
-            field: "stock",
-            headerName: "Stock",
-            type: "number",
-            headerAlign: "left",
-            align: "left",
-            minWidth: 70,
-            flex: 0.1,
-            renderCell: (params) => {
-                return (
-                    <>
-                        {params.row.stock < 10 ? (
-                            <span className="font-[500] text-red-700 rounded-full bg-red-200 p-1 w-6 h-6 flex items-center justify-center">
-                                {params.row.stock}
-                            </span>
-                        ) : (
-                            <span className="">{params.row.stock}</span>
-                        )}
-                    </>
-                );
-            },
-        },
-        {
-            field: "price",
-            headerName: "Price",
-            type: "number",
-            minWidth: 100,
-            headerAlign: "left",
-            align: "left",
-            flex: 0.2,
-            renderCell: (params) => {
-                return <span>₹{params.row.price?.toLocaleString()}</span>;
-            },
-        },
-        {
-            field: "discount_price",
-            headerName: "Discount Price",
-            type: "number",
-            minWidth: 100,
-            headerAlign: "left",
-            align: "left",
-            flex: 0.2,
-            renderCell: (params) => {
-                return (
-                    <span>₹{params.row.discount_price?.toLocaleString()}</span>
-                );
-            },
-        },
-        {
-            field: "rating",
-            headerName: "Rating",
-            type: "number",
-            minWidth: 100,
-            flex: 0.1,
-            align: "left",
-            headerAlign: "left",
-            renderCell: (params) => {
-                return (
-                    <Rating
-                        readOnly
-                        value={params.row.rating}
-                        size="small"
-                        precision={0.5}
-                    />
-                );
-            },
-        },
-        {
-            field: "actions",
-            headerName: "Actions",
-            minWidth: 100,
-            flex: 0.3,
-            type: "number",
-            sortable: false,
-            renderCell: (params) => {
-                return (
-                    <Actions
-                        name={params.row.name}
-                        updateDeletedProduct={updateDeletedProduct}
-                        id={params.row.id}
-                    />
-                );
-            },
-        },
-    ];
+  {
+    field: "id",
+    headerName: "Product ID",
+    minWidth: 100,
+    flex: 0.5,
+  },
+  {
+    field: "name",
+    headerName: "Name",
+    minWidth: 200,
+    flex: 1,
+    renderCell: (params) => {
+      return (
+        <div className="flex items-center gap-2">
+          <div className="w-10 h-10 rounded-full">
+            <img
+              draggable="false"
+              src={params.row.image}
+              alt={params.row.name}
+              className="w-full h-full rounded-full object-cover"
+            />
+          </div>
+          {params.row.name}
+        </div>
+      );
+    },
+  },
+  {
+    field: "category",
+    headerName: "Category",
+    minWidth: 100,
+    flex: 0.1,
+  },
+  {
+    field: "stock",
+    headerName: "Stock",
+    type: "number",
+    headerAlign: "left",
+    align: "left",
+    minWidth: 70,
+    flex: 0.1,
+    renderCell: (params) => {
+      return (
+        <>
+          {params.row.stock < 10 ? (
+            <span className="font-[500] text-red-700 rounded-full bg-red-200 p-1 w-6 h-6 flex items-center justify-center">
+              {params.row.stock}
+            </span>
+          ) : (
+            <span>{params.row.stock}</span>
+          )}
+        </>
+      );
+    },
+  },
+  {
+    field: "price",
+    headerName: "Price",
+    type: "number",
+    minWidth: 100,
+    headerAlign: "left",
+    align: "left",
+    flex: 0.2,
+    renderCell: (params) => {
+      return <span>₹{params.row.price?.toLocaleString()}</span>;
+    },
+  },
+  {
+    field: "discount_price",
+    headerName: "Discount Price",
+    type: "number",
+    minWidth: 100,
+    headerAlign: "left",
+    align: "left",
+    flex: 0.2,
+    renderCell: (params) => {
+      return (
+        <span>₹{params.row.discount_price?.toLocaleString()}</span>
+      );
+    },
+  },
+  {
+    field: "rating",
+    headerName: "Rating",
+    type: "number",
+    minWidth: 100,
+    flex: 0.1,
+    align: "left",
+    headerAlign: "left",
+    renderCell: (params) => {
+      return (
+        <Rating
+          readOnly
+          value={params.row.rating}
+          size="small"
+          precision={0.5}
+        />
+      );
+    },
+  },
+  {
+    field: "actions",
+    headerName: "Actions",
+    minWidth: 150, // ⬅️ Increased so icons don’t get squished
+    flex: 0.5,
+    sortable: false,
+    renderCell: (params) => {
+      console.log("Actions cell:", params.row); // ⬅️ Debug log
+      return (
+        <div className="flex gap-2 bg-yellow-100 p-1 rounded">
+          <Actions
+            id={params.row.id}
+            name={params.row.name}
+            updateDeletedProduct={updateDeletedProduct}
+          />
+        </div>
+      );
+    },
+  },
+];
+
 
     const rows = [];
 
