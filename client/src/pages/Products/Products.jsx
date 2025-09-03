@@ -123,7 +123,7 @@ const Products = () => {
 
     return (
         <>
-            <SeoData title="All Products | Flipkart" />
+            <SeoData title="All Products | FurryPaws" />
 
             <MinCategory />
             <main className="w-full pt-2 pb-5 sm:mt-0">

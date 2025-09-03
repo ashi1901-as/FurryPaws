@@ -541,16 +541,7 @@ const ProductDetails = () => {
                                     </div>
                                     {/* <!-- seller details --> */}
 
-                                    {/* <!-- flipkart plus banner --> */}
-                                    {/* <div className="lg:w-1/2 mt-4 border">
-                                        <img
-                                            draggable="false"
-                                            className="w-full h-full object-fill"
-                                            src="https://rukminim1.flixcart.com/lockin/763/305/images/promotion_banner_v2_active.png"
-                                            alt="flipkart plus"
-                                        />
-                                    </div> */}
-                                    {/* <!-- flipkart plus banner --> */}
+                           
 
                                     {/* <!-- description details --> */}
                                     <div className="flex flex-col sm:flex-row gap-1 sm:gap-14 mt-4 items-stretch text-sm">

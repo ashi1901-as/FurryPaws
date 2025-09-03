@@ -62,10 +62,10 @@ const Banner = () => {
                 your furry friend.
               </p>
               <div className="hero-buttons">
-                <a href="#newsletter" className="btn btn-primary">
+                <a href="/educational-articles" className="btn btn-primary">
                   Read and Learn about your pets
                 </a>
-                <a href="#shop" className="btn btn-secondary">
+                <a href="/products" className="btn btn-secondary">
                   Shop Products
                 </a>
               </div>

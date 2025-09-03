@@ -8,6 +8,7 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
+import {GrArticle} from "react-icons/gr";
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -80,10 +81,10 @@ const { auth, setAuth } = useAuth();
         </button>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8 text-gray-500 text-2xl mr-4">
-          <NavLink to="/" className="hover:text-[#62d3f3] transition-colors">
+        <div className="hidden md:flex items-center gap-8 text-gray-500 text-2xl mr-0">
+          {/*<NavLink to="/" className="hover:text-[#62d3f3] transition-colors">
             <BiHomeSmile />
-          </NavLink>
+          </NavLink>*/}
 
           {auth.user?.role !== 1 && auth.user && (
             <NavLink
@@ -94,6 +95,21 @@ const { auth, setAuth } = useAuth();
             </NavLink>
           )}
 
+
+           {auth?.user?.role !== 1 && (
+            <NavLink
+              to="/cart"
+              className="relative hover:text-[#62d3f3] transition-colors"
+            >
+              <BsCart2 />
+              {cartItems?.length > 0 && (
+                <span className="absolute -top-2 -right-2 text-xs bg-[#62d3f3] text-white rounded-full px-1">
+                  {cartItems.length}
+                </span>
+              )}
+            </NavLink>
+          )}
+          
           {auth.user && (
             <NavLink
               to={`${auth.user.role === 1 ? "/admin" : "/user"}/orders`}
@@ -102,6 +118,16 @@ const { auth, setAuth } = useAuth();
               <BsBox />
             </NavLink>
           )}
+          {/* 
+          {auth.user?.role !== 1 && auth.user && (
+            <NavLink
+              to="/educational-articles"
+              className="hover:text-[#62d3f3] transition-colors"
+            >
+              <GrArticle/>
+            </NavLink>
+          )}
+            */}
 
           {/* Account Dropdown */}
           <div
@@ -161,19 +187,7 @@ const { auth, setAuth } = useAuth();
             )}
           </div>
 
-          {auth?.user?.role !== 1 && (
-            <NavLink
-              to="/cart"
-              className="relative hover:text-[#62d3f3] transition-colors"
-            >
-              <BsCart2 />
-              {cartItems?.length > 0 && (
-                <span className="absolute -top-2 -right-2 text-xs bg-[#62d3f3] text-white rounded-full px-1">
-                  {cartItems.length}
-                </span>
-              )}
-            </NavLink>
-          )}
+         
         </div>
       </nav>
 

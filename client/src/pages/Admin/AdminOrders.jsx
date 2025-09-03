@@ -51,7 +51,7 @@ const AdminOrders = () => {
 
     return (
         <>
-            <SeoData title="Admin Orders | Flipkart" />
+            <SeoData title="Admin Orders | FurryPaws" />
 
             <main className="w-full px-4 sm:px-10 py-4">
                 <div className="flex gap-3.5 w-full">
