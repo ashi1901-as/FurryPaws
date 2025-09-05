@@ -1,49 +1,61 @@
+// backend/controllers/product/newProduct.js
 import productModel from "../../models/productModel.js";
 import { v2 as cloudinary } from "cloudinary";
-console.log("Reached newProduct route")
+
+console.log("Reached newProduct route");
+
 const newProduct = async (req, res) => {
   try {
-   console.log("🔥 Entered newProduct controller");
-console.log("🔥 Request body:", req.body);
-console.log("🔥 Request files:", req.files);
-console.log("🔥 Logged user:", req.user);
+    console.log("🔥 Entered newProduct controller");
+    console.log("🔥 Request body:", req.body);
+    console.log("🔥 Request files:", req.files);
+    console.log("🔥 Logged user:", req.user);
 
-    // ✅ Validate user
+    // Validate user
     if (!req.user?._id) {
-      return res.status(401).json({ success: false, message: "Unauthorized. User not found." });
+      return res
+        .status(401)
+        .json({ success: false, message: "Unauthorized. User not found." });
     }
 
-    // ✅ Validate logo
+    // Validate logo
     if (!req.files?.logo?.tempFilePath) {
-      console.log("❌ Logo file missing or invalid");
-      return res.status(400).json({ success: false, message: "Logo file missing or invalid" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Logo file missing or invalid" });
     }
 
-    // ✅ Validate product images
+    // Validate product images
     if (!req.files?.images) {
-      console.log("❌ Product images missing");
-      return res.status(400).json({ success: false, message: "At least 1 product image required" });
+      return res
+        .status(400)
+        .json({ success: false, message: "At least 1 product image required" });
     }
 
-    // ✅ Upload logo to Cloudinary
-    const logoResult = await cloudinary.uploader.upload(req.files.logo.tempFilePath, {
-      folder: "brands",
-    });
+    // Upload logo to Cloudinary
+    const logoResult = await cloudinary.uploader.upload(
+      req.files.logo.tempFilePath,
+      {
+        folder: "brands",
+      }
+    );
     const brandLogo = {
       public_id: logoResult.public_id,
       url: logoResult.secure_url,
     };
 
-    // ✅ Upload product images to Cloudinary
-    const imagesArray = Array.isArray(req.files.images) ? req.files.images : [req.files.images];
+    // Upload product images to Cloudinary
+    const imagesArray = Array.isArray(req.files.images)
+      ? req.files.images
+      : [req.files.images];
     const imagesLink = [];
 
     for (const file of imagesArray) {
       if (!file?.tempFilePath) {
-        console.log("❌ One of the product images is missing tempFilePath");
-        return res.status(400).json({ success: false, message: "Invalid product image file" });
+        return res
+          .status(400)
+          .json({ success: false, message: "Invalid product image file" });
       }
-
       const result = await cloudinary.uploader.upload(file.tempFilePath, {
         folder: "products",
       });
@@ -53,14 +65,14 @@ console.log("🔥 Logged user:", req.user);
       });
     }
 
-    // ✅ Parse highlights
+    // Parse highlights
     const highlights = req.body.highlights
       ? Array.isArray(req.body.highlights)
         ? req.body.highlights
         : [req.body.highlights]
       : [];
 
-    // ✅ Parse specifications safely
+    // Parse specifications safely
     let specifications = [];
     try {
       if (req.body.specifications) {
@@ -76,10 +88,12 @@ console.log("🔥 Logged user:", req.user);
       }
     } catch (err) {
       console.error("❌ Specification parsing error:", err);
-      return res.status(400).json({ success: false, message: "Invalid specifications format" });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid specifications format" });
     }
 
-    // ✅ Extract product info
+    // Extract product info
     const {
       name,
       description,
@@ -91,23 +105,16 @@ console.log("🔥 Logged user:", req.user);
       brandName,
     } = req.body;
 
-    // ✅ Log all fields before creation
-    console.log("✅ Creating product with:", {
-      name,
-      description,
-      price,
-      discountPrice,
-      category,
-      stock,
-      warranty,
-      highlights,
-      specifications,
-      images: imagesLink,
-      brand: { name: brandName, logo: brandLogo },
-      seller: req.user._id,
-    });
+    // Parse assured flag (may come as "true" string)
+    const assured = req.body.assured === "true" || req.body.assured === true;
 
-    // ✅ Create product in MongoDB
+    // Optional initial ratings / numOfReviews (if admin wants to seed)
+    const ratings = req.body.ratings ? Number(req.body.ratings) : 0;
+    const numOfReviews = req.body.numOfReviews
+      ? Number(req.body.numOfReviews)
+      : 0;
+
+    // Create product in DB
     const product = await productModel.create({
       name,
       description,
@@ -119,17 +126,17 @@ console.log("🔥 Logged user:", req.user);
       highlights,
       specifications,
       images: imagesLink,
-      brand: {
-        name: brandName,
-        logo: brandLogo,
-      },
+      brand: { name: brandName, logo: brandLogo },
       seller: req.user._id,
+      assured,
+      ratings,
+      numOfReviews,
     });
 
     console.log("✅ Product created:", product);
     return res.status(201).json({ success: true, product });
   } catch (error) {
-    console.error("🔥 New Product Error stack:", error.stack);
+    console.error("🔥 New Product Error stack:", error.stack || error);
     console.error("🔥 Full Error Object:", error);
     return res.status(500).json({
       success: false,

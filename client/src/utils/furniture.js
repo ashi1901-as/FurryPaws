@@ -1,38 +1,46 @@
 export const furnitureProducts = [
-    {
-        image: "https://rukminim2.flixcart.com/image/612/612/xif0q/bed/d/g/f/-original-imagpprfyygdfnfy.jpeg?q=70",
-        name: "Queen Beds",
-        offer: "Min 40% off",
-        tag: "Top Selling Styles",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/832/832/k3yrte80/collapsible-wardrobe/v/a/3/pp-88130-hcx-88130-pp-polypropylene-collapsible-wardrobe-finish-original-imaf744xhgmk6d7r.jpeg?q=70",
-        name: "Wardrobes & More",
-        offer: "From ₹999",
-        tag: "Must Buy",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/612/612/kshtxu80/home-temple/5/7/f/22-32-5-1010-nifinity-45-original-imag6fz7agt98hwy.jpeg?q=70",
-        name: "Wooden Mandir",
-        offer: "From ₹699",
-        tag: "Pooja Items",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/612/612/xif0q/tv-entertainment-unit/n/n/m/-original-imagrtbh4gh4nudw.jpeg?q=70",
-        name: "TV Shelves",
-        offer: "From ₹1999",
-        tag: "Top Selling",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/612/612/l1l1rww0/office-study-chair/x/s/u/-original-imagd4emqzrzdeaq.jpeg?q=70",
-        name: "Office Chairs",
-        offer: "Min 50% off",
-        tag: "Cushioned Chairs",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/612/612/khcb7gw0/kitchen-trolley/r/z/k/b10-sb-enterpsrize-original-imafxdfdz94yycnz.jpeg?q=70",
-        name: "Kitchen Trolleys",
-        offer: "Buy 3, Get 10% off",
-        tag: "Steel",
-    },
+  {
+    image:
+      "https://i.etsystatic.com/11232814/r/il/d9c659/1775701149/il_fullxfull.1775701149_pah4.jpg",
+    name: "Dog Collar with Bell",
+    offer: "From ₹199",
+    tag: "Accessories",
+    rating: 4.1, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRWtxhFRiZVzHj6ZLMupe7zecSiGzVwCT0XuWKykGoSLnTkzCeHjybqXz4p8qcOowg7nVXz5L8vGqm_YDe3mjaCgMIDU1y2y4xEpP582lQpCpoNl0EdV4z6SQ",
+    name: "Cat Litter Box",
+    offer: "From ₹999",
+    tag: "Accessories",
+    rating: 4.5, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image: "https://m.media-amazon.com/images/I/71OmPcYW7pS.jpg",
+    name: "Pet Bed – Soft & Washable",
+    offer: "From ₹1299",
+    tag: "Comfort",
+    rating: 4.5, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQXxpo2jlgQ0xY0iW2DWJ-NNMzj9pujqO-tzCUgs0XPlqdYQBlKC3uet2gPVxZUJIsSx703NMYJOgRW--24GER6RB7BHW4ftho0FJ4pus1DWlBeI0bszqjSWQ",
+    name: "Travel Carrier for Pets",
+    offer: "From ₹2499",
+    tag: "Travel",
+    rating: 4.4, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTGfFaoK2qS8ErP0DJIDeeHbrQ7AgTyi62xp4qTnL_Cw-ih5doMyhRHyGUYEccATfCDLoXHaKPNxFBZIU8sXi1GcyFs9nUBZxYgQIljX91UITdRBpqzHmSl",
+    name: "Stainless Steel Feeding Bowl",
+    offer: "From ₹299",
+    tag: "Essentials",
+    rating: 3.7, // ⭐
+    assured: true, // vet verified
+  },
 ];

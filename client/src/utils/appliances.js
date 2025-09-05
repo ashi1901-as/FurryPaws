@@ -1,38 +1,45 @@
 export const applianceProducts = [
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/kfeamq80/refrigerator-new/c/t/h/468asmqs-na-marq-by-flipkart-original-imafvufgxpd8bged.jpeg?q=70",
-        name: "Marq Refrigerators",
-        offer: "From ₹8999",
-        tag: "Buy Now",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/xif0q/refrigerator-new/t/x/s/-original-imaghtghjcf67haj.jpeg?q=70",
-        name: "Double Door Refrigerator",
-        offer: "From ₹16129",
-        tag: "Samsung, LG...",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/xif0q/washing-machine-new/0/q/e/-original-imags7pzrywzxc2z.jpeg?q=70",
-        name: "Washing Machine",
-        offer: "Min 30% off",
-        tag: "Samsung, LG, Marq",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/312/312/xif0q/television/f/1/a/-original-imagrnpbzhgcrmwz.jpeg?q=70",
-        name: "LED TVs",
-        offer: "From ₹7999",
-        tag: "Marq, Samsung, Mi...",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/312/312/xif0q/television/9/6/g/-original-imagnrjvxdhqr84v.jpeg?q=70",
-        name: "TCL LED TV",
-        offer: "Starting ₹8999",
-        tag: "Buy 2, Get 5% off",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/kzygpzk0/refrigerator-new/d/w/c/-original-imagbuvf8hqmcaak.jpeg?q=70",
-        name: "Microwave Ovens",
-        offer: "From ₹4999",
-        tag: "Godrej, Samsung...",
-    },
+  {
+    image: "https://m.media-amazon.com/images/I/61gCYrNT0CL.jpg",
+    name: "Dog Deworming Tablets",
+    offer: "From ₹299",
+    tag: "Health",
+    rating: 3.9, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://m.media-amazon.com/images/I/51VbwS1qlbL._UF1000,1000_QL80_.jpg",
+    name: "Multivitamin Syrup for Pets",
+    offer: "From ₹399",
+    tag: "Wellness",
+    rating: 4.0, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image: "https://m.media-amazon.com/images/I/61ZmanPgV2L._AC_SL1000_.jpg",
+    name: "Flea & Tick Collar",
+    offer: "From ₹499",
+    tag: "Vet Care",
+    rating: 4.2, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRUN9Ejc7aW83Q4UD3BZItczuzuVo8CIcrBdmWgBFCeQh6CJNxECXDWMZds4PRUuX9rucbr5VyiIklrIRtmOb8Jyy0xV5QfyT2AzN59Uj6ZGCwpOjn94o87_A",
+    name: "Skin & Coat Supplement",
+    offer: "From ₹349",
+    tag: "Care",
+    rating: 4.5, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRs3I2oxA570KrlJ31GPTAWEyuRHrnBtmCVhnwwiacLkbEUKQu4pTse7r4CXk6zjr9yX-iJBK8TH2PwTQa0tTymF7vt9iIncasxm58d1dsQ3yU_bx7abzlK4g",
+    name: "Ear Cleaner for Dogs & Cats",
+    offer: "From ₹299",
+    tag: "Hygiene",
+    rating: 4.4, // ⭐
+    assured: true, // vet verified
+  },
 ];

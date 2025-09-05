@@ -14,7 +14,7 @@ dotenv.config();
 const app = express();
 
 // 1️⃣ CORS middleware - must come BEFORE routes & body parsers
-const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5177"];
+const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5173"];
 app.use(
   cors({
     origin: allowedOrigins,
@@ -26,7 +26,10 @@ app.use(
 
 // 2️⃣ OPTIONS preflight handler
 app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+  res.header(
+    "Access-Control-Allow-Methods",
+    "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+  );
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.sendStatus(200);
 });
@@ -34,7 +37,13 @@ app.options("*", (req, res) => {
 // 3️⃣ Body parsers & file upload
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/", limits: { fileSize: 50 * 1024 * 1024 } }));
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: "/tmp/",
+    limits: { fileSize: 50 * 1024 * 1024 },
+  })
+);
 app.use(morgan("dev"));
 
 // 4️⃣ DB & routes

@@ -1,38 +1,47 @@
 export const electronicProducts = [
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/kokdci80/dslr-camera/v/e/x/z-24-200mm-z5-nikon-original-imag2zuekuxgxsgg.jpeg?q=70",
-        name: "Top Mirrorless Cameras",
-        offer: "From ₹24,499",
-        tag: "Canon, Sony, Fujifilm...",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/k4a7c7k0/printer/y/j/z/canon-e3370-original-imafn2wyyxjjvzd6.jpeg?q=70",
-        name: "Printers",
-        offer: "From ₹2336",
-        tag: "Canon",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/kybvo280/monitor/q/v/p/tuf-gaming-vg28uql1a-4k-ultra-hd-28-90lm0780-b01110-asus-original-imagahbtnupkgdfz.jpeg?q=70",
-        name: "ASUS Monitors",
-        offer: "From ₹14999",
-        tag: "Top Rated",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/flap/400/400/image/20c224cd52ae7a87.jpg?q=70",
-        name: "Best of Trimmers",
-        offer: "From ₹399",
-        tag: "realme, Mi, Phillips & more",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/xif0q/power-bank/d/a/f/-original-imagky3e8yp5ebvr.jpeg?q=70",
-        name: "Premium PowerBanks",
-        offer: "Shop Now",
-        tag: "Mi, realme & more",
-    },
-    {
-        image: "https://rukminim2.flixcart.com/image/400/400/ko8xtow0/monitor/t/a/y/d24-20-66aekac1in-lenovo-original-imag2qwzazcdmqtb.jpeg?q=70",
-        name: "Monitors",
-        offer: "From ₹7999",
-        tag: "Lenovo",
-    },
+  {
+    image:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSTtiDWucijx3Tr0nzJVZJ2pl-3LA4THVlheNjg6MxSoFosE_SNQNHEVt4tR_We0YN6dmJg3jcMA-FSaZpGgHyQ5OkI7Lh0wlTMfPTulhFsnvpK_v59B1gk",
+    name: "Pedigree Adult Dry Dog Food",
+    offer: "From ₹999",
+    tag: "Pedigree",
+    rating: 4.0, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSCIbOADCVYBhUn1HJ4TobqJIcyQ5JXPJINcj8EirSTb_llj4DhbQ2sB3rxuCZ8KRRoh6fDm1qMCNtGUj8bWkCDfmV-7VfRclrQaPEMmbinGuE_xDXxrJCgPw",
+    name: "Whiskas Adult Cat Food",
+    offer: "From ₹699",
+    tag: "Whiskas",
+    rating: 4.4, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRqZt3Dv1T5r8StHuNpo7lkaF5z_xDPE6d26Nixy4Gx7WQSyVBvuEtiM2-lYBqTHa0aH_L2dFllJJotBx_9ij-loqRSQMVTZZiBD_9NYtvaBz2gUa0N_xX_Rg",
+    name: "Royal Canin Puppy Food",
+    offer: "From ₹1499",
+    tag: "Royal Canin",
+    rating: 4.5, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQKu1oBFZo9kT0tB9dnX5VtvPRNUUy3j0jGpfcyXEfYy_baZfb3jjEwlmwDOGW-JpmQxaZXkB0o5E3ClgY2YeR6E3ougCDsubnM8kNHZ9c",
+    name: "Drools Chicken & Egg Dog Food",
+    offer: "From ₹899",
+    tag: "Drools",
+    rating: 4.1, // ⭐
+    assured: true, // vet verified
+  },
+  {
+    image:
+      "https://m.media-amazon.com/images/I/71guc5sZ1BL._AC_UL320_.jpghttps://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcTXAbJfUqDMv50u6fjgCFFtY0ne3xS0Of58b9taifMVEo53BkIfGZYK1CWyu98DvXqGD6cB429ofBNeV6hacneyKQiVy00mCeFOTDQPUf2ujVeMDohSmny-",
+    name: "Me-O Tuna Cat Food",
+    offer: "From ₹599",
+    tag: "Me-O",
+    rating: 3.8, // ⭐
+    assured: true, // vet verified
+  },
 ];

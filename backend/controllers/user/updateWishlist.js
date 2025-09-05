@@ -1,34 +1,40 @@
-import userModel from "../../models/userModel.js";
+// backend/controllers/user/updateWishlist.js
+import User from "../../models/userModel.js";
 
-const updateWishlist = async (req, res) => {
-    try {
-        const { productId, type } = req.body;
+export const updateWishlist = async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { productId, type } = req.body;
 
-        let response;
-        if (type === "add") {
-            response = await userModel.findByIdAndUpdate(req.user._id, {
-                $push: { wishlist: productId },
-            });
-        } else if (type === "remove") {
-            response = await userModel.findByIdAndUpdate(
-                req.user._id,
-                { $pull: { wishlist: productId } },
-                { new: true }
-            );
-        }
-        // console.log(type, response);
-        const wishlistItems = response.wishlist;
-        res.status(201).send({
-            success: true,
-            wishlistItems,
-        });
-    } catch (error) {
-        console.log("Error in Updating Wishlist Products: " + error);
-        res.status(500).send({
-            success: false,
-            message: "Error in Updating Wishlist Products",
-            error,
-        });
+    if (!productId || !type) {
+      return res
+        .status(400)
+        .json({ success: false, message: "productId and type are required" });
     }
+
+    const user = await User.findById(userId);
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+
+    if (type === "add") {
+      if (!user.wishlist.includes(productId)) user.wishlist.push(productId);
+    } else {
+      user.wishlist = user.wishlist.filter(
+        (id) => id.toString() !== productId.toString()
+      );
+    }
+
+    await user.save();
+    const updatedUser = await User.findById(userId).populate("wishlist");
+    return res
+      .status(200)
+      .json({ success: true, wishlistItems: user.wishlist });
+  } catch (error) {
+    console.error("Error in updateWishlist:", error);
+    return res.status(500).json({ success: false, message: error.message });
+  }
 };
+
 export default updateWishlist;
