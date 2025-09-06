@@ -20,32 +20,33 @@ const SideFilter = ({
 }) => {
     const [categoryToggle, setCategoryToggle] = useState(true);
     const [ratingsToggle, setRatingsToggle] = useState(true);
+    const [sliderValue, setSliderValue] = useState(price);
 
     const debounceTimeout = useRef(null);
 
-    // Debounce priceHandler to prevent multiple API calls on slider change
-    const priceHandler = (_, newPrice) => {
-        if (debounceTimeout.current) {
-            clearTimeout(debounceTimeout.current);
-        }
-        debounceTimeout.current = setTimeout(() => {
-            // Round the price values to the nearest multiple of 1000
-            let newVal = [
-                Math.round(newPrice[0] / 1000) * 1000,
-                Math.round(newPrice[1] / 1000) * 1000,
-            ];
-            setPrice(newVal);
-        }, 100);
+    const handleSliderChange = (_, newPrice) => {
+        setSliderValue(newPrice);
     };
 
     useEffect(() => {
+        if (debounceTimeout.current) {
+            clearTimeout(debounceTimeout.current);
+        }
+
+        debounceTimeout.current = setTimeout(() => {
+            const newVal = [
+                Math.round(sliderValue[0] / 1000) * 1000,
+                Math.round(sliderValue[1] / 1000) * 1000,
+            ];
+            setPrice(newVal);
+        }, 300);
+
         return () => {
-            // Clean up the timeout when the component unmounts
             if (debounceTimeout.current) {
                 clearTimeout(debounceTimeout.current);
             }
         };
-    }, []);
+    }, [sliderValue, setPrice]);
 
     const clearFilters = () => {
         setPrice([0, 200000]);
@@ -60,7 +61,7 @@ const SideFilter = ({
                     <p className="text-lg font-medium">Filters</p>
                     <span
                         className="uppercase text-primaryBlue text-xs cursor-pointer font-medium"
-                        onClick={() => clearFilters()}
+                        onClick={clearFilters}
                     >
                         clear all
                     </span>
@@ -70,23 +71,19 @@ const SideFilter = ({
                     {/* Price slider filter */}
                     <div className="flex flex-col gap-2 border-b px-4">
                         <span className="font-medium text-xs">PRICE</span>
-
                         <Slider
-                            value={price}
-                            onChange={priceHandler}
+                            value={sliderValue}
+                            onChange={handleSliderChange}
                             valueLabelDisplay="auto"
                             getAriaLabel={() => "Price range slider"}
                             min={0}
                             max={200000}
                         />
-
                         <div className="flex gap-3 items-center mb-2">
                             <span className="flex-1 min-w-[70px] border px-4 py-1 rounded-sm text-gray-800 bg-gray-50">
                                 ₹{price[0].toLocaleString()}
                             </span>
-                            <span className="font-medium text-gray-400">
-                                to
-                            </span>
+                            <span className="font-medium text-gray-400">to</span>
                             <span className="flex-1 min-w-[70px] border px-4 py-1 rounded-sm text-gray-800 bg-gray-50">
                                 ₹{price[1].toLocaleString()}
                             </span>
@@ -99,24 +96,19 @@ const SideFilter = ({
                             className="flex justify-between cursor-pointer py-2 pb-4 items-center"
                             onClick={() => setCategoryToggle(!categoryToggle)}
                         >
-                            <p className="font-medium text-xs uppercase">
-                                Category
-                            </p>
+                            <p className="font-medium text-xs uppercase">Category</p>
                             {categoryToggle ? (
                                 <ExpandLessIcon sx={{ fontSize: "20px" }} />
                             ) : (
                                 <ExpandMoreIcon sx={{ fontSize: "20px" }} />
                             )}
                         </div>
-
                         {categoryToggle && (
                             <div className="flex flex-col pb-1">
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="category-radio-buttons-group"
-                                        onChange={(e) =>
-                                            setCategory(e.target.value)
-                                        }
+                                        onChange={(e) => setCategory(e.target.value)}
                                         name="category-radio-buttons"
                                         value={category}
                                     >
@@ -125,14 +117,7 @@ const SideFilter = ({
                                                 value={el}
                                                 key={i}
                                                 control={<Radio size="small" />}
-                                                label={
-                                                    <span
-                                                        className="text-sm"
-                                                        key={i}
-                                                    >
-                                                        {el}
-                                                    </span>
-                                                }
+                                                label={<span className="text-sm">{el}</span>}
                                             />
                                         ))}
                                     </RadioGroup>
@@ -147,24 +132,19 @@ const SideFilter = ({
                             className="flex justify-between cursor-pointer py-2 pb-4 items-center"
                             onClick={() => setRatingsToggle(!ratingsToggle)}
                         >
-                            <p className="font-medium text-xs uppercase">
-                                Ratings
-                            </p>
+                            <p className="font-medium text-xs uppercase">Ratings</p>
                             {ratingsToggle ? (
                                 <ExpandLessIcon sx={{ fontSize: "20px" }} />
                             ) : (
                                 <ExpandMoreIcon sx={{ fontSize: "20px" }} />
                             )}
                         </div>
-
                         {ratingsToggle && (
                             <div className="flex flex-col pb-1">
                                 <FormControl>
                                     <RadioGroup
                                         aria-labelledby="ratings-radio-buttons-group"
-                                        onChange={(e) =>
-                                            setRatings(e.target.value)
-                                        }
+                                        onChange={(e) => setRatings(e.target.value)}
                                         value={ratings}
                                         name="ratings-radio-buttons"
                                     >
@@ -176,13 +156,7 @@ const SideFilter = ({
                                                 label={
                                                     <span className="flex items-center text-sm">
                                                         {el}
-                                                        <StarIcon
-                                                            sx={{
-                                                                fontSize:
-                                                                    "12px",
-                                                                mx: 0.5,
-                                                            }}
-                                                        />
+                                                        <StarIcon sx={{ fontSize: "12px", mx: 0.5 }} />
                                                         & above
                                                     </span>
                                                 }

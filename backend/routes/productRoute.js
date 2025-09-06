@@ -8,32 +8,18 @@ import updateProduct from "../controllers/product/updateProduct.js";
 import getFilteredProducts from "../controllers/product/getFilteredProducts.js";
 import searchProductController from "../controllers/product/searchProductController.js";
 
-// router object
 const router = express.Router();
 console.log("✅ productRoute file loaded");
-// Add new product POST
-router.post("/new-product", requireSignIn, isAdmin, (req, res, next) => {
-  console.log("🔥 Route hit: /new-product");
-  next();
-}, newProduct);
 
-
-// Get Seller Product
+// More specific routes must be at the top
 router.get("/seller-product", requireSignIn, isAdmin, getSellerProducts);
-
-// Delete Product
-router.post("/delete-product", requireSignIn, isAdmin, deleteProduct);
-
-// Find filtered product
-router.get("/filtered-products", getFilteredProducts);
-
-// Find product details from product id
-router.get("/:id", findProduct);
-
-// Update product details from product id
-router.post("/update/:id", requireSignIn, isAdmin, updateProduct);
-
-// Search products using keyword
 router.get("/search/:keyword", searchProductController);
+router.get("/filtered-products", getFilteredProducts); // Correctly placed here
+
+// More general routes (with dynamic parameters) are at the bottom
+router.get("/:id", findProduct);
+router.post("/new-product", requireSignIn, isAdmin, newProduct);
+router.post("/delete-product", requireSignIn, isAdmin, deleteProduct);
+router.post("/update/:id", requireSignIn, isAdmin, updateProduct);
 
 export default router;
