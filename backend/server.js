@@ -4,16 +4,35 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
+import path from "path";
+import { fileURLToPath } from 'url';
+import { v2 as cloudinary } from "cloudinary"; // ✅ Import cloudinary here
+
+// Configuration
+dotenv.config();
+
+// ✅ PLACE CLOUDINARY CONFIGURATION HERE
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API_KEY,
+  api_secret: process.env.CLOUD_SECRET,
+});
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 import connectDB from "./config/database.js";
 import authRoute from "./routes/authRoute.js";
 import productRoute from "./routes/productRoute.js";
 import userRoute from "./routes/userRoute.js";
 
-dotenv.config();
 const app = express();
+console.log("🔥 .env loaded. Checking Cloudinary keys...");
+console.log("CLOUD_NAME:", process.env.CLOUD_NAME);
+console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY);
+console.log("CLOUD_SECRET:", process.env.CLOUD_SECRET);
 
-// 1️⃣ CORS middleware - must come BEFORE routes & body parsers
+// 1️⃣ CORS middleware
 const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5177"];
 app.use(
   cors({
@@ -32,9 +51,18 @@ app.options("*", (req, res) => {
 });
 
 // 3️⃣ Body parsers & file upload
+app.use(
+  fileUpload({
+    useTempFiles: true,
+    tempFileDir: path.join(__dirname, 'tmp'),
+    limits: { fileSize: 50 * 1024 * 1024 },
+    abortOnLimit: true,
+    createParentPath: true,
+  })
+);
+
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/", limits: { fileSize: 50 * 1024 * 1024 } }));
 app.use(morgan("dev"));
 
 // 4️⃣ DB & routes

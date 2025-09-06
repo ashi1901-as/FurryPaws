@@ -1,38 +1,39 @@
 import { Link } from "react-router-dom";
-import { 
-  Bone, 
-  Shirt, 
-  Heart, 
-  Home, 
-  PawPrint, 
-  Droplet, 
-  Sofa, 
-  Sparkles, 
-  ShoppingCart 
+// ✅ Import the new categories list
+import { categories } from "../../utils/constants";
+import {
+    Bone,
+    Shirt,
+    Heart,
+    Home,
+    PawPrint,
+    Droplet,
+    Sparkles,
+    ShoppingCart
 } from "lucide-react";
 
-const catNav = [
-  { name: "Food", icon: Bone },          // Pet food & treats
-  { name: "Clothing", icon: Shirt },      // Pet clothes & accessories
-  { name: "Medicines", icon: Heart },       // Vet care, meds, wellness
-  { name: "Housing", icon: Home },       // Kennels, cages, aquariums
-  { name: "Accessories", icon: PawPrint },    // Carriers, leashes, travel gear
-  { name: "Grooming", icon: Droplet },   // Shampoo, brushes
-  { name: "Toys", icon: Sparkles },      // Balls, chew toys
-  { name: "Supplies", icon: ShoppingCart }, // General pet supplies
-];
-
-
+// Create a mapping object to link your category names to icons
+// This makes the code cleaner and more robust
+const categoryIcons = {
+   "Food": Bone ,          // Pet food & treats
+  "Clothing": Shirt ,      // Pet clothes & accessories
+  "Medicines": Heart ,       // Vet care, meds, wellness
+  "Housing":Home,       // Kennels, cages, aquariums
+  "Accessories": PawPrint,    // Carriers, leashes, travel gear
+  "Grooming": Droplet,   // Shampoo, brushes
+  "Toys": Sparkles,      // Balls, chew toys
+  "Supplies": ShoppingCart, // General pet supplies
+};
 
 const Categories = () => {
   return (
     <section className="hidden sm:block bg-[#fcfcfc] py-5 shadow-sm">
       <div className="flex items-center justify-center gap-12">
-        {catNav.map((item, i) => {
-          const Icon = item.icon;
+        {categories.map((catName, i) => {
+          const Icon = categoryIcons[catName] || ShoppingCart; 
           return (
             <Link
-              to={`/products?category=${item.name}`}
+              to={`/products?category=${catName}`} 
               key={i}
               className="flex flex-col items-center gap-2 group transition-all duration-300"
             >
@@ -40,7 +41,7 @@ const Categories = () => {
                 <Icon className="h-6 w-6 text-[#14213D] group-hover:text-white transition-all duration-300" />
               </div>
               <span className="text-sm font-medium text-[#14213D] group-hover:text-[#FCA311] transition-colors">
-                {item.name}
+                {catName}
               </span>
             </Link>
           );

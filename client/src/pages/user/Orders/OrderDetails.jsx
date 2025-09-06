@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Tracker from "./Tracker";
-import MinCategory from "../../../components/MinCategory";
+
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
 import Spinner from "../../../components/Spinner";
@@ -56,7 +56,7 @@ const OrderDetails = () => {
         <>
             <SeoData title="Order Details | Flipkart" />
 
-            <MinCategory />
+       
             <main className="w-full py-2 sm:py-8">
                 {loading ? (
                     <Spinner />

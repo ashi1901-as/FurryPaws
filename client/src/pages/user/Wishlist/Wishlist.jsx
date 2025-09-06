@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Product from "./Product";
-import MinCategory from "../../../components/MinCategory";
+
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
 import Spinner from "../../../components/Spinner";
@@ -27,7 +27,7 @@ const Wishlist = () => {
                     }/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
                     {
                         headers: {
-                            Authorization: auth.token,
+                                   Authorization: auth?.token,
                         },
                     }
                 );
@@ -81,7 +81,7 @@ const Wishlist = () => {
     return (
         <>
             <SeoData title="My Wishlist" />
-            <MinCategory />
+     
 
             {isLoading && page === 1 ? (
                 <Spinner />

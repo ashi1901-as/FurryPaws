@@ -117,6 +117,11 @@ const productSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+    // ✅ Add the new fAssured field
+    fAssured: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 export default mongoose.model("Product", productSchema);

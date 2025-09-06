@@ -21,7 +21,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
 import { getDeliveryDate, getDiscount } from "../../utils/functions";
-import MinCategory from "../../components/MinCategory";
+
 import axios from "axios";
 import { useAuth } from "../../context/auth";
 import { fashionProducts } from "../../utils/fashion";
@@ -225,7 +225,7 @@ const ProductDetails = () => {
                 <>
                     <SeoData title={product?.name} />
                     <ScrollToTopOnRouteChange />
-                    <MinCategory />
+                
                     <main className="mt-5 sm:mt-0">
                         {/* <!-- product image & description container --> */}
                         <div className="w-full flex flex-col lg:flex-row bg-white sm:p-2 relative">

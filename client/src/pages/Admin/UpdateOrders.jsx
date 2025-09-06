@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import MinCategory from "../../components/MinCategory";
+
 import axios from "axios";
 import Tracker from "./../user/Orders/Tracker";
 import Spinner from "../../components/Spinner";
@@ -78,7 +78,7 @@ const UpdateOrders = () => {
         <>
             <SeoData title="Order Details | FurryPaws" />
 
-            <MinCategory />
+
             <main className="w-full py-2 sm:py-8">
                 {loading ? (
                     <Spinner />

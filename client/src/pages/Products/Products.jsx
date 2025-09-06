@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-key */
 import Pagination from "@mui/material/Pagination";
 import { useState, useEffect } from "react";
-import MinCategory from "../../components/MinCategory";
+
 import Product from "../../components/ProductListing/Product";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -125,7 +125,7 @@ const Products = () => {
         <>
             <SeoData title="All Products | FurryPaws" />
 
-            <MinCategory />
+         
             <main className="w-full pt-2 pb-5 sm:mt-0">
                 {/* <!-- row --> */}
                 <div className="flex gap-3 mt-2 sm:mt-2 sm:mx-3 m-auto ">

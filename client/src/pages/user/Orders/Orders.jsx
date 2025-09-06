@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import OrderItem from "./OrderItem";
 import SearchIcon from "@mui/icons-material/Search";
-import MinCategory from "../../../components/MinCategory";
+
 import Spinner from "../../../components/Spinner";
 import axios from "axios";
 import { useAuth } from "../../../context/auth";
@@ -43,7 +43,7 @@ const Orders = () => {
         <>
             <SeoData title="My Orders | Flipkart" />
 
-            <MinCategory />
+         
             <main className="w-full px-4 sm:px-10 py-4 ">
                 {/* <!-- row --> */}
                 {/* <!-- orders column --> */}
