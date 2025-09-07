@@ -19,7 +19,7 @@ cloudinary.config({
 });
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _dirname = path.dirname(_filename);
 
 import connectDB from "./config/database.js";
 import authRoute from "./routes/authRoute.js";
