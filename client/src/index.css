@@ -3,7 +3,8 @@
 @tailwind utilities;
 /* index.css or App.css */
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
+   overscroll-behavior-y: none; 
 }
 
 @layer base {

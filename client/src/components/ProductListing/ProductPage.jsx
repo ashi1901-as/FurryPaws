@@ -24,8 +24,7 @@ import { getDeliveryDate, getDiscount } from "../../utils/functions";
 
 import axios from "axios";
 import { useAuth } from "../../context/auth";
-import { fashionProducts } from "../../utils/fashion";
-import { electronicProducts } from "../../utils/electronics";
+
 import ScrollToTopOnRouteChange from "../../utils/ScrollToTopOnRouteChange";
 import { useCart } from "../../context/cart";
 import SeoData from "../../SEO/SeoData";
@@ -114,7 +113,7 @@ const ProductDetails = () => {
                     `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist`,
                     {
                         headers: {
-                            Authorization: auth.token,
+                             Authorization: `Bearer ${auth.token}`,
                         },
                     }
                 );
@@ -721,15 +720,7 @@ const ProductDetails = () => {
                         {/* <!-- product image & description container --> */}
 
                         {/* Sliders */}
-                        <div className="flex flex-col gap-3 mt-6">
-                            <ProductSlider
-                                title={"Recommendation"}
-                                products={[
-                                    ...fashionProducts,
-                                    ...electronicProducts,
-                                ]}
-                            />
-                        </div>
+                       
                     </main>
                 </>
             )}

@@ -8,7 +8,6 @@ import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdLogout } from "react-icons/md";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
-import {GrArticle} from "react-icons/gr";
 
 const Header = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
