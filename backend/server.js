@@ -5,7 +5,7 @@ import morgan from "morgan";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
 import path from "path";
-import { fileURLToPath } from 'url';
+import { fileURLToPath } from "url";
 import { v2 as cloudinary } from "cloudinary"; // ✅ Import cloudinary here
 
 // Configuration
@@ -33,7 +33,7 @@ console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY);
 console.log("CLOUD_SECRET:", process.env.CLOUD_SECRET);
 
 // 1️⃣ CORS middleware
-const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5177"];
+const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5173"];
 app.use(
   cors({
     origin: allowedOrigins,
@@ -43,18 +43,11 @@ app.use(
   })
 );
 
-// 2️⃣ OPTIONS preflight handler
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.sendStatus(200);
-});
-
 // 3️⃣ Body parsers & file upload
 app.use(
   fileUpload({
     useTempFiles: true,
-    tempFileDir: path.join(__dirname, 'tmp'),
+    tempFileDir: path.join(__dirname, "tmp"),
     limits: { fileSize: 50 * 1024 * 1024 },
     abortOnLimit: true,
     createParentPath: true,
