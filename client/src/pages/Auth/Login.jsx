@@ -54,24 +54,31 @@ const { auth, setAuth } = useAuth();
       );
 
       if (response.status === 200) {
-        toast.success("Logged in Successfully!");
-        setAuth({
-          ...auth,
-          user: response.data.user,
-          token: response.data.token,
-        });
+  toast.success("Logged in Successfully!");
 
-        Cookies.set("auth", JSON.stringify(response.data), {
-          expires: 7,
-        });
-        if (response.data.user.role === 1) {
+  // ✅ build object once
+  const loginData = {
+    user: response.data.user,
+    token: response.data.token,
+  };
+
+  // ✅ update context
+  setAuth(loginData);
+
+  // ✅ persist in localStorage (used by AuthProvider)
+  localStorage.setItem("auth", JSON.stringify(loginData));
+
+  // ✅ optional cookie backup
+  Cookies.set("auth", JSON.stringify(loginData), { expires: 7 });
+
+  // ✅ redirect
+  if (response.data.user.role === 1) {
     navigate("/admin/dashboard");
   } else {
     navigate("/");
   }
-        // redirect back or to home
-       // navigate(location.state || "/");
-      }
+}
+
     } catch (error) {
       console.error("Error:", error);
       // invalid password

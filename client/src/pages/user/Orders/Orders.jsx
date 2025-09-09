@@ -23,7 +23,7 @@ const Orders = () => {
                     `${import.meta.env.VITE_SERVER_URL}/api/v1/user/orders`,
                     {
                         headers: {
-                            Authorization: auth?.token,
+                            Authorization: `Bearer ${auth?.token}`, 
                         },
                     }
                 );
