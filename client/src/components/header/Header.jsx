@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { AiOutlineUser, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineUser } from "react-icons/ai";
 import { BsCart2, BsBox } from "react-icons/bs";
 import { BiHomeSmile } from "react-icons/bi";
 import { RiArrowDropDownLine } from "react-icons/ri";
@@ -14,9 +14,7 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef(null);
 
-const { auth, setAuth } = useAuth();
-
-
+  const { auth, setAuth } = useAuth();
   const [cartItems] = useCart();
 
   let closeTimeout;
@@ -31,10 +29,9 @@ const { auth, setAuth } = useAuth();
   };
 
   const handleLogout = () => {
-  setAuth({ user: null, token: "" });
-  localStorage.removeItem("auth");
-};
-
+    setAuth({ user: null, token: "" });
+    localStorage.removeItem("auth");
+  };
 
   const handleStickyHeader = () => {
     if (window.scrollY > 0) {
@@ -81,21 +78,18 @@ const { auth, setAuth } = useAuth();
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8 text-gray-500 text-2xl mr-0">
-          {/*<NavLink to="/" className="hover:text-[#62d3f3] transition-colors">
-            <BiHomeSmile />
-          </NavLink>*/}
-
-          {auth.user?.role !== 1 && auth.user && (
+          {/* Orders */}
+          {auth.user && (
             <NavLink
-              to="/user/wishlist"
+              to={`${auth.user.role === 1 ? "/admin" : "/user"}/orders`}
               className="hover:text-[#62d3f3] transition-colors"
             >
-              <AiOutlineHeart />
+              <BsBox />
             </NavLink>
           )}
 
-
-           {auth?.user?.role !== 1 && (
+          {/* Cart */}
+          {auth?.user?.role !== 1 && (
             <NavLink
               to="/cart"
               className="relative hover:text-[#62d3f3] transition-colors"
@@ -108,25 +102,6 @@ const { auth, setAuth } = useAuth();
               )}
             </NavLink>
           )}
-          
-          {auth.user && (
-            <NavLink
-              to={`${auth.user.role === 1 ? "/admin" : "/user"}/orders`}
-              className="hover:text-[#62d3f3] transition-colors"
-            >
-              <BsBox />
-            </NavLink>
-          )}
-          {/* 
-          {auth.user?.role !== 1 && auth.user && (
-            <NavLink
-              to="/educational-articles"
-              className="hover:text-[#62d3f3] transition-colors"
-            >
-              <GrArticle/>
-            </NavLink>
-          )}
-            */}
 
           {/* Account Dropdown */}
           <div
@@ -185,8 +160,6 @@ const { auth, setAuth } = useAuth();
               </div>
             )}
           </div>
-
-         
         </div>
       </nav>
 
@@ -197,16 +170,7 @@ const { auth, setAuth } = useAuth();
             <BiHomeSmile />
           </NavLink>
 
-          {auth.user?.role !== 1 && auth.user && (
-            <NavLink
-              to="/user/wishlist"
-              className="hover:text-[#62d3f3] transition-colors"
-              onClick={() => setMenuOpen(false)}
-            >
-              <AiOutlineHeart />
-            </NavLink>
-          )}
-
+          {/* Orders */}
           {auth.user && (
             <NavLink
               to={`${auth.user.role === 1 ? "/admin" : "/user"}/orders`}
@@ -238,6 +202,7 @@ const { auth, setAuth } = useAuth();
             </Link>
           )}
 
+          {/* Cart */}
           {auth?.user?.role !== 1 && (
             <NavLink
               to="/cart"

@@ -21,6 +21,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
 import { getDeliveryDate, getDiscount } from "../../utils/functions";
+import fAssuredImage from "../../assets/images/fassured.png";
 
 import axios from "axios";
 import { useAuth } from "../../context/auth";
@@ -257,24 +258,7 @@ const ProductDetails = () => {
                                                 />
                                             )}
                                         </Slider>
-                                        <div
-                                            className={`absolute top-4 right-4 shadow-lg bg-white w-9 h-9 border flex items-center justify-center rounded-full ${
-                                                isAdmin ? "hidden" : ""
-                                            } `}
-                                        >
-                                            <span
-                                                onClick={addToWishlistHandler}
-                                                className={`${
-                                                    itemInWishlist
-                                                        ? "text-red-500"
-                                                        : "hover:text-red-500 text-gray-300"
-                                                } cursor-pointer`}
-                                            >
-                                                <FavoriteIcon
-                                                    sx={{ fontSize: "18px" }}
-                                                />
-                                            </span>
-                                        </div>
+                                        
                                     </div>
 
                                     <div className="w-full flex gap-3">
@@ -287,7 +271,7 @@ const ProductDetails = () => {
                                                         : addToCartHandler
                                                 }
                                                 disabled={isAdmin}
-                                                className="disabled:cursor-not-allowed p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 text-white bg-[#ff9f00] rounded-sm shadow hover:shadow-lg"
+                                                className="btn-primary disabled:cursor-not-allowed p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 rounded-sm shadow hover:shadow-lg"
                                             >
                                                 <ShoppingCartIcon />
                                                 {itemInCart
@@ -300,10 +284,10 @@ const ProductDetails = () => {
                                             disabled={
                                                 isAdmin || product.stock < 1
                                             }
-                                            className={`disabled:cursor-not-allowed flex items-center justify-center gap-2 text-white rounded-sm shadow hover:shadow-lg p-4 ${
+                                            className={`btn-primary disabled:cursor-not-allowed p-2 sm:p-4 w-1/2 flex items-center justify-center gap-2 rounded-sm shadow hover:shadow-lg ${
                                                 product.stock < 1
                                                     ? " w-full bg-red-600 cursor-not-allowed"
-                                                    : "w-1/2 bg-[#fb641b]"
+                                                    : "w-1/2 bg-[#2e2f2f]"
                                             }`}
                                         >
                                             <FlashOnIcon />
@@ -338,8 +322,7 @@ const ProductDetails = () => {
                                         </span>
                                         <span className="w-[80px] object-contain">
                                             <img
-                                                src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fa_62673a.png"
-                                                alt="f-assured"
+                                                    src={fAssuredImage}
                                             />
                                         </span>
                                     </span>

@@ -11,7 +11,7 @@ import AdminRoute from "./AdminRoute";
 import Products from "../pages/Products/Products";
 import ProductPage from "../components/ProductListing/ProductPage.jsx";
 import Orders from "../pages/user/Orders/Orders";
-import Wishlist from "../pages/user/Wishlist/Wishlist";
+
 import Cart from "../pages/user/Cart/Cart";
 import Shipping from "../pages/user/Cart/Shipping";
 import OrderSuccess from "../pages/user/Cart/OrderSuccess";
@@ -49,7 +49,7 @@ const Routers = () => {
                     path="orders/order_details/:id"
                     element={<OrderDetails />}
                 />
-                <Route path="wishlist" element={<Wishlist />} />
+              
             </Route>
 
             <Route path="/admin" element={<AdminRoute />}>
