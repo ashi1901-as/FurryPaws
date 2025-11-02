@@ -91,21 +91,17 @@ const Cart = () => {
                                     } w-full`}
                                 >
                                     <p>
-                                        For payment purposes, you can use the
-                                        following test card details:
+                                        
                                     </p>
                                     <ul>
                                         <li>
-                                            <strong>Card Number:</strong> 4242
-                                            4242 4242 4242
+                                           
                                         </li>
                                         <li>
-                                            <strong>Expiry Date:</strong> Any
-                                            future date (e.g., 12/25)
+                                            
                                         </li>
                                         <li>
-                                            <strong>CVV:</strong> Any 3-digit
-                                            number (e.g., 123)
+                                            
                                         </li>
                                     </ul>
                                 </div>
@@ -118,7 +114,7 @@ const Cart = () => {
                                     className={`${
                                         cartItems.length < 1
                                             ? "hidden"
-                                            : "bg-orange"
+                                            : "bg-[#2e2f2f]"
                                     } w-full sm:w-1/3 mx-2 sm:mx-6 my-4 py-4 font-medium text-white shadow hover:shadow-lg rounded-sm `}
                                 >
                                     PLACE ORDER

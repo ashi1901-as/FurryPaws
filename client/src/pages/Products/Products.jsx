@@ -21,7 +21,6 @@ const Products = () => {
     );
     const [ratings, setRatings] = useState(0);
     const [products, setProducts] = useState([]);
-    const [wishlistItems, setWishlistItems] = useState([]);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [productsCount, setProductsCount] = useState(0);
@@ -42,8 +41,7 @@ const Products = () => {
                     priceRange: [price[0], price[1]],
                     ratings: ratings,
                 };
-                
-                // Log the parameters being sent to the server for debugging
+
                 console.log("Frontend sending params:", params);
 
                 const res = await axios.get(
@@ -51,7 +49,6 @@ const Products = () => {
                     { params }
                 );
 
-                // Set products from the response
                 setProducts(res.data.products);
                 setProductsCount(res.data.products.length);
 
@@ -62,7 +59,7 @@ const Products = () => {
 
                 if (error.response?.status === 404) {
                     toast.error("No Products Found!", { toastId: "productNotFound" });
-                    setProducts([]); // Clear products to show "no products found"
+                    setProducts([]);
                     setProductsCount(0);
                 } else {
                     toast.error("Something went wrong! Please try after sometime.", {
@@ -73,28 +70,6 @@ const Products = () => {
         };
         fetchFilteredData();
     }, [price, category, ratings]);
-
-    useEffect(() => {
-        const fetchWishlistItems = async () => {
-            try {
-                const res = await axios.get(
-                    `${import.meta.env.VITE_SERVER_URL}/api/v1/user/wishlist`,
-                    {
-                        headers: {
-                            Authorization: auth?.token,
-                        },
-                    }
-                );
-                setWishlistItems(res.data.wishlistItems);
-            } catch (error) {
-                console.error("Error fetching data from wishlist:", error);
-                toast.error("Error in Fetching Wishlist Items!", {
-                    toastId: "error",
-                });
-            }
-        };
-        auth?.token && !isAdmin && fetchWishlistItems();
-    }, [auth?.token, isAdmin]);
 
     const startIndex = (currentPage - 1) * productsPerPage;
     const endIndex = startIndex + productsPerPage;
@@ -141,8 +116,6 @@ const Products = () => {
                                                 <Product
                                                     key={product._id}
                                                     {...product}
-                                                    wishlistItems={wishlistItems}
-                                                    setWishlistItems={setWishlistItems}
                                                 />
                                             ))}
                                         </div>
