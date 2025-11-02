@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:8080/api/v1";
+const API_URL = `${import.meta.env.VITE_API_URL || "http://localhost:8080"}/api/v1`;
 
 export const useProductsByCategory = (category) => {
   const [products, setProducts] = useState([]);
@@ -12,10 +12,12 @@ export const useProductsByCategory = (category) => {
     const fetchProducts = async () => {
       try {
         setLoading(true);
-        const { data } = await axios.get(`${API_URL}/product?category=${category}`);
+        const { data } = await axios.get(
+          `${API_URL}/product?category=${encodeURIComponent(category)}`
+        );
         setProducts(data.products || []);
       } catch (err) {
-        console.error(`❌ Error fetching ${category} products:`, err);
+        console.error(`Error fetching ${category} products:`, err);
         setProducts([]);
       } finally {
         setLoading(false);
