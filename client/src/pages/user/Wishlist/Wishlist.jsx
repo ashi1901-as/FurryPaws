@@ -27,7 +27,7 @@ const Wishlist = () => {
                     }/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
                     {
                         headers: {
-                                   Authorization: auth?.token,
+                                     Authorization: `Bearer ${auth?.token}`, 
                         },
                     }
                 );
@@ -65,7 +65,10 @@ const Wishlist = () => {
                     import.meta.env.VITE_SERVER_URL
                 }/api/v1/user/update-wishlist`,
                 { productId, type: "remove" },
-                { headers: { Authorization: auth.token } }
+                { headers: {
+  Authorization: `Bearer ${auth?.token}`,
+}
+}
             );
             toast.success("Product Removed From Wishlist");
             setWishlistItems((prev) =>
