@@ -38,6 +38,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "https://furry-paws-xi.vercel.app",
+  "http://furry-frontend.s3-website-us-east-1.amazonaws.com",
 ].filter(Boolean);
 
 console.log("Allowed origins:", allowedOrigins);
@@ -82,3 +83,4 @@ app.use("/api/v1/user", userRoute);
 // 5️⃣ Start server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
