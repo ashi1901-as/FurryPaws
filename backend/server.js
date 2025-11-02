@@ -32,16 +32,31 @@ console.log("CLOUD_NAME:", process.env.CLOUD_NAME);
 console.log("CLOUD_API_KEY:", process.env.CLOUD_API_KEY);
 console.log("CLOUD_SECRET:", process.env.CLOUD_SECRET);
 
-// 1️⃣ CORS middleware
-const allowedOrigins = [process.env.CLIENT_URL || "http://localhost:5173"];
-app.use(
-  cors({
-    origin: allowedOrigins,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+// 1️⃣ CORS middleware - explicit allowed origins and preflight handling
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://furry-paws-xi.vercel.app",
+].filter(Boolean);
+
+console.log("Allowed origins:", allowedOrigins);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // allow requests with no origin (curl, mobile clients, same-origin)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    return callback(new Error("CORS policy: This origin is not allowed"));
+  },
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+// ensure preflight (OPTIONS) is handled for all routes
+app.options("*", cors(corsOptions));
 
 // 3️⃣ Body parsers & file upload
 app.use(
