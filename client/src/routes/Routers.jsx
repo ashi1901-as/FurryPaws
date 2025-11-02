@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home/Home";
-import PageNotFound from "./../pages/PageNotFound";
+import PageNotFound from "../pages/PageNotFound";
 import Login from "../pages/Auth/Login";
 import Register from "../pages/Auth/Register";
 import ForgotPassword from "../pages/Auth/ForgotPassword";
@@ -10,7 +10,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import Products from "../pages/Products/Products";
 import ProductPage from "../components/ProductListing/ProductPage.jsx";
-import Orders from "./../pages/user/Orders/Orders";
+import Orders from "../pages/user/Orders/Orders";
 import Wishlist from "../pages/user/Wishlist/Wishlist";
 import Cart from "../pages/user/Cart/Cart";
 import Shipping from "../pages/user/Cart/Shipping";
@@ -21,6 +21,7 @@ import AdminOrders from "../pages/Admin/AdminOrders";
 import UpdateOrders from "../pages/Admin/UpdateOrders";
 import DeleteAllOrder from "../pages/DeleteAllOrder.jsx";
 import EducationalArticles from "../pages/EducationalArticles.jsx";
+import ArticleDetail from "../pages/ArticleDetail.jsx"; // ✅ import this
 
 const Routers = () => {
     return (
@@ -32,12 +33,15 @@ const Routers = () => {
             <Route path="/products" element={<Products />} />
             <Route path="/search" element={<Products />} />
             <Route path="/cart" element={<Cart />} />
+
             <Route path="/shipping" element={<PrivateRoute />}>
                 <Route path="" element={<Shipping />} />
                 <Route path="confirm" element={<OrderSuccess />} />
                 <Route path="failed" element={<OrderFailed />} />
             </Route>
+
             <Route path="product/:productId" element={<ProductPage />} />
+
             <Route path="/user" element={<PrivateRoute />}>
                 <Route path="dashboard/*" element={<Dashboard />} />
                 <Route path="orders" element={<Orders />} />
@@ -47,6 +51,7 @@ const Routers = () => {
                 />
                 <Route path="wishlist" element={<Wishlist />} />
             </Route>
+
             <Route path="/admin" element={<AdminRoute />}>
                 <Route path="dashboard/*" element={<AdminDashboard />} />
                 <Route path="orders" element={<AdminOrders />} />
@@ -55,9 +60,14 @@ const Routers = () => {
                     element={<UpdateOrders />}
                 />
             </Route>
-            <Route path="*" element={<PageNotFound />} />
-            <Route path="/all-order/delete" element={<DeleteAllOrder />} />
+
+            {/* ✅ Article routes */}
             <Route path="/educational-articles" element={<EducationalArticles />} />
+            <Route path="/articles/:id" element={<ArticleDetail />} />
+
+            {/* Others */}
+            <Route path="/all-order/delete" element={<DeleteAllOrder />} />
+            <Route path="*" element={<PageNotFound />} />
         </Routes>
     );
 };

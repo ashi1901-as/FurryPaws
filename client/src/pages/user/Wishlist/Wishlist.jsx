@@ -27,7 +27,7 @@ const Wishlist = () => {
                     }/api/v1/user/wishlist-products?page=${page}&pageSize=${pageSize}`,
                     {
                         headers: {
-                                   Authorization: auth?.token,
+                                     Authorization: `Bearer ${auth?.token}`, 
                         },
                     }
                 );
